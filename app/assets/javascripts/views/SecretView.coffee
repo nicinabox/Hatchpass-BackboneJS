@@ -44,3 +44,6 @@ class window.SecretView extends Backbone.View
 
       if app.mobile
         $('#secret').show().attr('readonly', false)
+
+      if model.keyCode == 13
+        $('#secret').focus().select()
