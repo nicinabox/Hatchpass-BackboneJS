@@ -20,11 +20,10 @@
 
     SecretView.prototype.initialize = function() {
       app.Config.bind('change', this.render, this);
-      $("#domain").autocomplete({
+      return $("#domain").autocomplete({
         source: app.Domains.pluck('url'),
         autoFocus: true
       });
-      return this.loadMaster();
     };
 
     SecretView.prototype.saveDomain = function(e) {
@@ -38,7 +37,6 @@
         existing_domain.save({
           used: (used ? used + 1 : 1)
         });
-        console.log(existing_domain.get('used'));
         app.Domains.sort();
       }
       return app.Domains.create({
@@ -55,6 +53,7 @@
     SecretView.prototype.focusInput = function() {
       return $('input.required:visible', this.$el).each(function() {
         if (!this.value.length) {
+          console.log($(this));
           $(this).focus();
           return false;
         }

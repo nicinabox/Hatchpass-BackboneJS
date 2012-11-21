@@ -17,6 +17,7 @@
       visibility: 'visible',
       height: $(window).height()
     });
+    app.SecretView.focusInput();
     $(window).on('resize', function(e) {
       var _this = this;
       return setTimeout(function() {
