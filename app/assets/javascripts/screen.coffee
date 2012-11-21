@@ -1,13 +1,28 @@
 $ ->
+  setActivePanel = (target) ->
+    target  ||= location.hash || '#domains'
+    $target   = $(target)
+    $nav_item = $(".panel-nav a[href^=#{target}]")
+
+    $nav_item.parents('#sidebar').find('.panel').hide()
+    $nav_item.siblings().removeClass('active')
+    $nav_item.addClass('active')
+
+    $target.show()
+
   $('#root').css
-    height: $(window).height()
     visibility: 'visible'
+    height: $(window).height()
+
+  $(window).on 'resize', (e) ->
+    setTimeout =>
+      $('#root').height($(this).height())
+    , 200
 
   $('.panel-nav a').on 'click', (e) ->
-    e.preventDefault()
-    $target = $(this.hash)
-    $(this).parents('#sidebar').find('.panel').hide()
-    $target.show()
+    setActivePanel(this.hash)
+
+  setActivePanel()
 
   hide_help = localStorage.help
   unless hide_help
