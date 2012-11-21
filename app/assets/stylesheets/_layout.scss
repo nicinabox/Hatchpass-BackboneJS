@@ -90,12 +90,17 @@ a {
     border: 1px solid #ddd;
     color: #aaa;
     font-size: 13px;
+    &.active {
+      color: #666;
+      border-color: #aaa;
+    }
   }
 }
 .no-results {
   border: 1px dashed #ddd;
   color: #aaa;
   padding: 10px;
+  margin: 20px;
 }
 #footer {
   position: absolute;
