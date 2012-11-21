@@ -51,4 +51,4 @@ class window.Secret extends Backbone.Model
         nums += 1
 
     secret = secret.join('').substr(0, config.length)
-    @set(secret: secret)
+    @set secret: secret
