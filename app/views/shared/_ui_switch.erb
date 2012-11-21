@@ -1,0 +1,15 @@
+<%
+  name ||= ''
+%>
+
+<div class="onoffswitch">
+  <input type="hidden" name="<%= name %>" value="false" readonly="true">
+  <input type="checkbox" name="<%= name %>" value="true" id="<%= name %>" class="onoffswitch-checkbox">
+  <label class="onoffswitch-label" for="<%= name %>">
+    <div class="onoffswitch-inner">
+      <div class="onoffswitch-active">ON</div>
+      <div class="onoffswitch-inactive">OFF</div>
+    </div>
+    <div class="onoffswitch-switch"></div>
+  </label>
+</div>
