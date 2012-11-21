@@ -21,6 +21,9 @@
 
     DomainsView.prototype.addDomain = function(domain) {
       var view;
+      if (app.Domains.length) {
+        this.$el.find('.no-results').hide();
+      }
       view = new DomainView({
         model: domain
       });
@@ -28,10 +31,7 @@
     };
 
     DomainsView.prototype.addAllDomains = function() {
-      if (app.Domains.length) {
-        this.$el.find('.no-results').hide();
-        return app.Domains.each(this.addDomain);
-      }
+      return app.Domains.each(this.addDomain, this);
     };
 
     return DomainsView;

@@ -65,7 +65,10 @@
       if (secret) {
         $('#secret').val(secret.get('secret'));
         if (app.mobile) {
-          return $('#secret').show().attr('readonly', false);
+          $('#secret').show().attr('readonly', false);
+        }
+        if (model.keyCode === 13) {
+          return $('#secret').focus().select();
         }
       }
     };

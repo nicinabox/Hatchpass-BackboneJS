@@ -31,7 +31,10 @@
 
     DomainView.prototype.clear = function(e) {
       e.preventDefault();
-      return this.model.destroy();
+      this.model.destroy();
+      if (!app.Domains.length) {
+        return app.DomainsView.$el.find('.no-results').show();
+      }
     };
 
     DomainView.prototype.load = function(e) {
