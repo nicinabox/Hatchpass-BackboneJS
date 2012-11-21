@@ -1,17 +1,15 @@
 class window.SecretView extends Backbone.View
   el: $('#new_secret form')
   events:
-    # 'change #master': 'toggleMaster'
     'keyup input.required': 'render'
     'focus #secret': 'saveDomain'
 
   initialize: ->
     app.Config.bind('change', @render, this);
+
     $("#domain").autocomplete
       source: app.Domains.pluck 'url'
       autoFocus: true
-
-    @loadMaster()
 
   saveDomain: (e) ->
     e.target.setSelectionRange 0, e.target.value.length
@@ -22,9 +20,6 @@ class window.SecretView extends Backbone.View
 
       existing_domain.save
         used: (if used then used + 1 else 1)
-
-      console.log existing_domain.get 'used'
-
       app.Domains.sort()
 
     app.Domains.create
@@ -38,12 +33,9 @@ class window.SecretView extends Backbone.View
   focusInput: ->
     $('input.required:visible', this.$el).each ->
       if !@value.length
+        console.log $(this)
         $(this).focus()
         false
-
-  # toggleMaster: ->
-  #   if app.Config.get 'save_all'
-  #     app.ConfigView.saveConfig()
 
   render: (model) ->
     if model instanceof Backbone.Model
