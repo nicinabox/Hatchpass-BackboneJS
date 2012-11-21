@@ -1,7 +1,7 @@
 class window.SecretView extends Backbone.View
   el: $('#new_secret form')
   events:
-    'change #master': 'toggleMaster'
+    # 'change #master': 'toggleMaster'
     'keyup input.required': 'render'
     'focus #secret': 'saveDomain'
 
@@ -25,9 +25,9 @@ class window.SecretView extends Backbone.View
         $(this).focus()
         false
 
-  toggleMaster: ->
-    if app.Config.get 'save_all'
-      app.ConfigView.saveConfig()
+  # toggleMaster: ->
+  #   if app.Config.get 'save_all'
+  #     app.ConfigView.saveConfig()
 
   render: (model) ->
     if model instanceof Backbone.Model
