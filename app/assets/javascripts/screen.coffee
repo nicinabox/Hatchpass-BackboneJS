@@ -14,6 +14,8 @@ $ ->
     visibility: 'visible'
     height: $(window).height()
 
+  app.SecretView.focusInput()
+
   $(window).on 'resize', (e) ->
     setTimeout =>
       $('#root').height($(this).height())
