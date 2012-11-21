@@ -1,6 +1,7 @@
 Modernizr.load [
   # Vendor
     "//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"
+    "/javascripts/vendor/jquery-ui-1.9.1.custom.min.js"
   , "/javascripts/vendor/fastclick.js"
   , "/javascripts/vendor/lodash.min.js"
   , "/javascripts/vendor/backbone-min.js"

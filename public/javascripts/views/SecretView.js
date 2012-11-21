@@ -14,13 +14,16 @@
     SecretView.prototype.el = $('#new_secret form');
 
     SecretView.prototype.events = {
-      'change #master': 'toggleMaster',
       'keyup input.required': 'render',
       'focus #secret': 'saveDomain'
     };
 
     SecretView.prototype.initialize = function() {
       app.Config.bind('change', this.render, this);
+      $("#domain").autocomplete({
+        source: app.Domains.pluck('url'),
+        autoFocus: true
+      });
       return this.loadMaster();
     };
 
@@ -43,12 +46,6 @@
           return false;
         }
       });
-    };
-
-    SecretView.prototype.toggleMaster = function() {
-      if (app.Config.get('save_all')) {
-        return app.ConfigView.saveConfig();
-      }
     };
 
     SecretView.prototype.render = function(model) {

@@ -7,6 +7,10 @@ class window.SecretView extends Backbone.View
 
   initialize: ->
     app.Config.bind('change', @render, this);
+    $("#domain").autocomplete
+      source: app.Domains.pluck 'url'
+      autoFocus: true
+
     @loadMaster()
 
   saveDomain: (e) ->
