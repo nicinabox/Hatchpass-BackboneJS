@@ -53,7 +53,6 @@
     SecretView.prototype.focusInput = function() {
       return $('input.required:visible', this.$el).each(function() {
         if (!this.value.length) {
-          console.log($(this));
           $(this).focus();
           return false;
         }

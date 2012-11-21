@@ -33,7 +33,6 @@ class window.SecretView extends Backbone.View
   focusInput: ->
     $('input.required:visible', this.$el).each ->
       if !@value.length
-        console.log $(this)
         $(this).focus()
         false
 
