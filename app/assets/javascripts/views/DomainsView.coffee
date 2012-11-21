@@ -7,11 +7,12 @@ class window.DomainsView extends Backbone.View
     app.Domains.fetch()
 
   addDomain: (domain) ->
+    if app.Domains.length
+      this.$el.find('.no-results').hide()
+
     view = new DomainView
       model: domain
     this.$('ul').prepend view.render().el
 
   addAllDomains: ->
-    if app.Domains.length
-      this.$el.find('.no-results').hide()
-      app.Domains.each @addDomain
+    app.Domains.each @addDomain, this

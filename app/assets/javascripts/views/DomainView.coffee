@@ -16,6 +16,9 @@ class window.DomainView extends Backbone.View
     e.preventDefault();
     @model.destroy()
 
+    unless app.Domains.length
+      app.DomainsView.$el.find('.no-results').show()
+
   load: (e) ->
     e.preventDefault()
     # app.SwipeView.swipe.next()
