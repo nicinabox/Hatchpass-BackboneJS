@@ -3,14 +3,14 @@ class window.Domain extends Backbone.Model
     @bind 'error', (model, errors) ->
       # console.log errors
 
-  validate: (attrs) ->
+  validate: (domain) ->
     errors = []
-    domains = app.Domains.pluck 'url'
+    domains = app.Domains.pluck('url')
 
-    if _.include(domains, attrs.url)
+    if !domain.id and _.include domains, domain.url
       errors.push "URL must be unique"
 
-    if _.isEmpty attrs.url
+    if _.isEmpty domain.url
       errors.push "URL cannot be blank"
 
     unless _.isEmpty(errors)
