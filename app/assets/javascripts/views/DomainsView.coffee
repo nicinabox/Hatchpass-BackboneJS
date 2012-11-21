@@ -15,4 +15,5 @@ class window.DomainsView extends Backbone.View
     this.$('ul').prepend view.render().el
 
   addAllDomains: ->
+    this.$('ul li').not('.no-results').remove()
     app.Domains.each @addDomain, this
