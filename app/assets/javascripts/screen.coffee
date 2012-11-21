@@ -3,6 +3,12 @@ $ ->
     height: $(window).height()
     visibility: 'visible'
 
+  $('.panel-nav a').on 'click', (e) ->
+    e.preventDefault()
+    $target = $(this.hash)
+    $(this).parents('#sidebar').find('.panel').hide()
+    $target.show()
+
   hide_help = localStorage.help
   unless hide_help
     $('.help').show()

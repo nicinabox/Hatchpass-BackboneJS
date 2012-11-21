@@ -7,6 +7,13 @@
       height: $(window).height(),
       visibility: 'visible'
     });
+    $('.panel-nav a').on('click', function(e) {
+      var $target;
+      e.preventDefault();
+      $target = $(this.hash);
+      $(this).parents('#sidebar').find('.panel').hide();
+      return $target.show();
+    });
     hide_help = localStorage.help;
     if (!hide_help) {
       $('.help').show();
