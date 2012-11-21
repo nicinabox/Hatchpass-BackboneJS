@@ -3,6 +3,10 @@
 
   $(function() {
     var hide_help;
+    $('#root').css({
+      height: $(window).height(),
+      visibility: 'visible'
+    });
     hide_help = localStorage.help;
     if (!hide_help) {
       $('.help').show();

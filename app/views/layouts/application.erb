@@ -26,18 +26,9 @@
   <script src="/javascripts/modernizr.load.js"></script>
 </head>
 <body>
-  <div id="header">
-    <a id="logo" href="/">Hatchpass</a>
-  </div>
 
-  <%= yield %>
-
-  <div id="footer">
-    <nav>
-      <span>A project by <a href="http://twitter.com/nicinabox">@nicinabox</a></span>
-      <a href="/about">About</a>
-      <a href="/privacy">Privacy</a>
-    </nav>
+  <div id="root">
+    <%= yield %>
   </div>
 
   <script type="text/javascript">
@@ -53,7 +44,6 @@
       s.parentNode.insertBefore(t, s);
     })();
   </script>
-
 
 </body>
 </html>

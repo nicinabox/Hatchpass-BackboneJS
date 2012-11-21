@@ -1,4 +1,8 @@
 $ ->
+  $('#root').css
+    height: $(window).height()
+    visibility: 'visible'
+
   hide_help = localStorage.help
   unless hide_help
     $('.help').show()

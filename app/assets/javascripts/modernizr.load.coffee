@@ -8,7 +8,7 @@ Modernizr.load [
   , "/javascripts/vendor/json2.js"
   , "/javascripts/vendor/Crypto.js"
   , "/javascripts/vendor/SHA256.js"
-  , "/javascripts/vendor/swipe.min.js"
+  # , "/javascripts/vendor/swipe.min.js"
   , "/javascripts/jquery.addons.js"
 
   # App
@@ -20,7 +20,7 @@ Modernizr.load [
   , "/javascripts/views/DomainsView.js"
   , "/javascripts/views/DomainView.js"
   , "/javascripts/views/SecretView.js"
-  , "/javascripts/views/SwipeView.js"
+  # , "/javascripts/views/SwipeView.js"
   , "/javascripts/application.js"
   , "/javascripts/screen.js"
 

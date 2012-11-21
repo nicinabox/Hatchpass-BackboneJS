@@ -36,7 +36,6 @@
 
     DomainView.prototype.load = function(e) {
       e.preventDefault();
-      app.SwipeView.swipe.next();
       $("#domain").val(this.model.get('url'));
       app.SecretView.render(this.model);
       return $('#secret').focus();

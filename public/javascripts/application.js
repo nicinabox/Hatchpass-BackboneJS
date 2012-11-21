@@ -16,8 +16,7 @@
       model: app.Config
     });
     app.DomainsView = new DomainsView;
-    app.SecretView = new SecretView;
-    return app.SwipeView = new SwipeView;
+    return app.SecretView = new SecretView;
   });
 
 }).call(this);

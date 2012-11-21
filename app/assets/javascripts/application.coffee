@@ -20,4 +20,4 @@ $ ->
 
   app.DomainsView = new DomainsView
   app.SecretView = new SecretView
-  app.SwipeView = new SwipeView
+  # app.SwipeView = new SwipeView

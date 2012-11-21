@@ -11,7 +11,7 @@
       return DomainsView.__super__.constructor.apply(this, arguments);
     }
 
-    DomainsView.prototype.el = $('#recent_domains');
+    DomainsView.prototype.el = $('#domains');
 
     DomainsView.prototype.initialize = function() {
       app.Domains.on('add', this.addDomain, this);

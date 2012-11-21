@@ -1,5 +1,5 @@
 class window.DomainsView extends Backbone.View
-  el: $('#recent_domains')
+  el: $('#domains')
 
   initialize: ->
     app.Domains.on('add', @addDomain, this)
