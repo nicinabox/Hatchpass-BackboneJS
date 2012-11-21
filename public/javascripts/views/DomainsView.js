@@ -31,6 +31,7 @@
     };
 
     DomainsView.prototype.addAllDomains = function() {
+      this.$('ul li').not('.no-results').remove();
       return app.Domains.each(this.addDomain, this);
     };
 

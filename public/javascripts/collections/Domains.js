@@ -15,6 +15,10 @@
 
     Domains.prototype.model = Domain;
 
+    Domains.prototype.comparator = function(domain) {
+      return domain.get('used');
+    };
+
     return Domains;
 
   })(Backbone.Collection);

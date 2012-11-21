@@ -15,14 +15,14 @@
       return this.bind('error', function(model, errors) {});
     };
 
-    Domain.prototype.validate = function(attrs) {
+    Domain.prototype.validate = function(domain) {
       var domains, errors;
       errors = [];
       domains = app.Domains.pluck('url');
-      if (_.include(domains, attrs.url)) {
+      if (!domain.id && _.include(domains, domain.url)) {
         errors.push("URL must be unique");
       }
-      if (_.isEmpty(attrs.url)) {
+      if (_.isEmpty(domain.url)) {
         errors.push("URL cannot be blank");
       }
       if (!_.isEmpty(errors)) {
