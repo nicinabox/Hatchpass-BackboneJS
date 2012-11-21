@@ -15,10 +15,22 @@ class window.SecretView extends Backbone.View
 
   saveDomain: (e) ->
     e.target.setSelectionRange 0, e.target.value.length
+    domain = this.$('#domain').val()
+
+    if (existing_domain = app.Domains.where(url: domain)[0])
+      used = existing_domain.get 'used'
+
+      existing_domain.save
+        used: (if used then used + 1 else 1)
+
+      console.log existing_domain.get 'used'
+
+      app.Domains.sort()
 
     app.Domains.create
-      url: this.$('#domain').val()
+      url: domain
       config: app.Config.toJSON()
+      used: 1
 
   loadMaster: ->
     $('#master').val app.Config.get 'master'
