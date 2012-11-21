@@ -24,7 +24,7 @@
       view = new DomainView({
         model: domain
       });
-      return this.$('ul').append(view.render().el);
+      return this.$('ul').prepend(view.render().el);
     };
 
     DomainsView.prototype.addAllDomains = function() {

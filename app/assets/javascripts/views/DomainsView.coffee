@@ -9,7 +9,7 @@ class window.DomainsView extends Backbone.View
   addDomain: (domain) ->
     view = new DomainView
       model: domain
-    this.$('ul').append view.render().el
+    this.$('ul').prepend view.render().el
 
   addAllDomains: ->
     if app.Domains.length
