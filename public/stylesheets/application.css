@@ -436,7 +436,7 @@ table {
 }
 
 .onoffswitch-switch {
-  width: 23px;
+  width: 27px;
   margin: 0px;
   background: #A1A1A1;
   border: 2px solid #FFFFFF;
@@ -501,6 +501,24 @@ a {
 #settings {
   display: none;
 }
+#settings form .field {
+  padding: 5px 20px;
+}
+#settings form label {
+  display: block;
+  float: left;
+  width: 50%;
+}
+#settings form input {
+  width: 50%;
+  float: right;
+}
+#settings form .onoffswitch {
+  float: right;
+}
+#settings form .onoffswitch label {
+  width: auto;
+}
 
 #domains ul {
   list-style: none;
@@ -528,6 +546,9 @@ a {
   z-index: 1;
   color: #ddd;
 }
+#domains ul li .remove:hover {
+  color: #BD1D01;
+}
 
 .panel-nav {
   margin: 20px;
@@ -540,16 +561,21 @@ a {
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border: 1px solid #ddd;
   color: #aaa;
   font-size: 13px;
+}
+.panel-nav a.active {
+  color: #666;
+  border-color: #aaa;
 }
 
 .no-results {
   border: 1px dashed #ddd;
   color: #aaa;
   padding: 10px;
+  margin: 20px;
 }
 
 #footer {
@@ -559,24 +585,54 @@ a {
   padding: 10px 0;
 }
 
-input {
-  padding: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-input[readonly] {
-  border: 0;
-  background: transparent;
-}
-
 #domain, #secret {
   font-size: 23px;
   padding: 10px;
   width: 70%;
   color: #666;
+}
+
+form .field {
+  overflow: hidden;
+  *zoom: 1;
+}
+form label {
+  font-size: 14px;
+  color: #555;
+}
+
+input {
+  padding: 8px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: #dddddd 0 1px 2px inset;
+  -moz-box-shadow: #dddddd 0 1px 2px inset;
+  box-shadow: #dddddd 0 1px 2px inset;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  outline: none;
+  -webkit-transition: background 0.15s ease-out;
+  -moz-transition: background 0.15s ease-out;
+  -o-transition: background 0.15s ease-out;
+  transition: background 0.15s ease-out;
+  margin-bottom: 10px;
+}
+input:focus {
+  background: #fff;
+}
+input[readonly] {
+  border: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+hr {
+  margin: 11px 0 10px;
+  border: 0;
+  border-bottom: 1px dashed #dadada;
 }

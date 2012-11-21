@@ -2,18 +2,31 @@
 (function() {
 
   $(function() {
-    var hide_help;
+    var hide_help, setActivePanel;
+    setActivePanel = function(target) {
+      var $nav_item, $target;
+      target || (target = location.hash || '#domains');
+      $target = $(target);
+      $nav_item = $(".panel-nav a[href^=" + target + "]");
+      $nav_item.parents('#sidebar').find('.panel').hide();
+      $nav_item.siblings().removeClass('active');
+      $nav_item.addClass('active');
+      return $target.show();
+    };
     $('#root').css({
-      height: $(window).height(),
-      visibility: 'visible'
+      visibility: 'visible',
+      height: $(window).height()
+    });
+    $(window).on('resize', function(e) {
+      var _this = this;
+      return setTimeout(function() {
+        return $('#root').height($(_this).height());
+      }, 200);
     });
     $('.panel-nav a').on('click', function(e) {
-      var $target;
-      e.preventDefault();
-      $target = $(this.hash);
-      $(this).parents('#sidebar').find('.panel').hide();
-      return $target.show();
+      return setActivePanel(this.hash);
     });
+    setActivePanel();
     hide_help = localStorage.help;
     if (!hide_help) {
       $('.help').show();
