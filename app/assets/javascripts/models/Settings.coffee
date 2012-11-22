@@ -1,4 +1,4 @@
-class window.Config extends Backbone.Model
+class window.Settings extends Backbone.Model
   localStorage: new Store("settings")
   defaults:
     key: ''

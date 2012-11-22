@@ -3,17 +3,17 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  window.Config = (function(_super) {
+  window.Settings = (function(_super) {
 
-    __extends(Config, _super);
+    __extends(Settings, _super);
 
-    function Config() {
-      return Config.__super__.constructor.apply(this, arguments);
+    function Settings() {
+      return Settings.__super__.constructor.apply(this, arguments);
     }
 
-    Config.prototype.localStorage = new Store("settings");
+    Settings.prototype.localStorage = new Store("settings");
 
-    Config.prototype.defaults = {
+    Settings.prototype.defaults = {
       key: '',
       length: 10,
       caps: true,
@@ -21,17 +21,17 @@
       save_all: false
     };
 
-    Config.prototype.initialize = function() {
+    Settings.prototype.initialize = function() {
       return this.set({
         key: this.newKey()
       });
     };
 
-    Config.prototype.newKey = function() {
+    Settings.prototype.newKey = function() {
       return Crypto.SHA256(new Date().getTime().toString()).substr(0, 5);
     };
 
-    return Config;
+    return Settings;
 
   })(Backbone.Model);
 

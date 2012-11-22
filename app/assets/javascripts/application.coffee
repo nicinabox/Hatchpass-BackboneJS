@@ -9,14 +9,14 @@ window.app ||= {
 $ ->
 
   # Models
-  app.Config = new Config
+  app.Settings = new Settings
 
   # Collections
   app.Domains = new Domains
 
   # Views
-  app.ConfigView = new ConfigView
-    model: app.Config
+  app.SettingsView = new SettingsView
+    model: app.Settings
 
   app.DomainsView = new DomainsView
   app.SecretView = new SecretView

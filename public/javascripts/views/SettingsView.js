@@ -3,23 +3,23 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  window.ConfigView = (function(_super) {
+  window.SettingsView = (function(_super) {
 
-    __extends(ConfigView, _super);
+    __extends(SettingsView, _super);
 
-    function ConfigView() {
-      return ConfigView.__super__.constructor.apply(this, arguments);
+    function SettingsView() {
+      return SettingsView.__super__.constructor.apply(this, arguments);
     }
 
-    ConfigView.prototype.el = $('#settings');
+    SettingsView.prototype.el = $('#settings');
 
-    ConfigView.prototype.tagName = "input";
+    SettingsView.prototype.tagName = "input";
 
-    ConfigView.prototype.events = {
-      'change input': 'saveConfig'
+    SettingsView.prototype.events = {
+      'change input': 'saveSettings'
     };
 
-    ConfigView.prototype.initialize = function() {
+    SettingsView.prototype.initialize = function() {
       var _this = this;
       this.model.on('change', this.render, this);
       return this.model.fetch({
@@ -33,7 +33,7 @@
       });
     };
 
-    ConfigView.prototype["import"] = function() {
+    SettingsView.prototype["import"] = function() {
       var import_key, import_master, import_settings;
       if (localStorage.hp_settings) {
         import_key = localStorage.hp_key;
@@ -56,7 +56,7 @@
       }
     };
 
-    ConfigView.prototype.render = function() {
+    SettingsView.prototype.render = function() {
       var config, key, value, _results;
       config = this.model.toJSON();
       _results = [];
@@ -75,7 +75,7 @@
       return _results;
     };
 
-    ConfigView.prototype.saveConfig = function() {
+    SettingsView.prototype.saveSettings = function() {
       var config, master;
       config = $('form', this.el).serializeObject();
       master = $('#master').val();
@@ -90,7 +90,7 @@
       }
     };
 
-    return ConfigView;
+    return SettingsView;
 
   })(Backbone.View);
 

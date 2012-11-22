@@ -10,10 +10,10 @@
   });
 
   $(function() {
-    app.Config = new Config;
+    app.Settings = new Settings;
     app.Domains = new Domains;
-    app.ConfigView = new ConfigView({
-      model: app.Config
+    app.SettingsView = new SettingsView({
+      model: app.Settings
     });
     app.DomainsView = new DomainsView;
     return app.SecretView = new SecretView;

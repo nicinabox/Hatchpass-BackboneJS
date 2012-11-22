@@ -19,7 +19,7 @@
     };
 
     SecretView.prototype.initialize = function() {
-      app.Config.bind('change', this.render, this);
+      app.Settings.bind('change', this.render, this);
       return $("#domain").autocomplete({
         source: app.Domains.pluck('url'),
         autoFocus: true
@@ -43,7 +43,7 @@
       }
       app.Domains.create({
         url: domain,
-        config: app.Config.toJSON(),
+        config: app.Settings.toJSON(),
         used: 1
       });
       return $("#domain").autocomplete('option', {
@@ -52,7 +52,7 @@
     };
 
     SecretView.prototype.loadMaster = function() {
-      return $('#master').val(app.Config.get('master'));
+      return $('#master').val(app.Settings.get('master'));
     };
 
     SecretView.prototype.focusInput = function() {
@@ -75,7 +75,7 @@
       if (model instanceof Backbone.Model) {
         config = model.get('config');
       }
-      config || (config = app.Config.toJSON());
+      config || (config = app.Settings.toJSON());
       secret = new Secret({
         master: $('#master').val(),
         domain: $('#domain').val(),

@@ -13,11 +13,11 @@ Modernizr.load [
   , "/javascripts/jquery.addons.js"
 
   # App
-  , "/javascripts/models/Config.js"
+  , "/javascripts/models/Settings.js"
   , "/javascripts/models/Domain.js"
   , "/javascripts/models/Secret.js"
   , "/javascripts/collections/Domains.js"
-  , "/javascripts/views/ConfigView.js"
+  , "/javascripts/views/SettingsView.js"
   , "/javascripts/views/DomainsView.js"
   , "/javascripts/views/DomainView.js"
   , "/javascripts/views/SecretView.js"

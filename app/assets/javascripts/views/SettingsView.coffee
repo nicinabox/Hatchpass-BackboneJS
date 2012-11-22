@@ -1,8 +1,8 @@
-class window.ConfigView extends Backbone.View
+class window.SettingsView extends Backbone.View
   el: $('#settings')
   tagName: "input"
   events:
-    'change input': 'saveConfig'
+    'change input': 'saveSettings'
 
   initialize: ->
     @model.on('change', @render, this)
@@ -47,7 +47,7 @@ class window.ConfigView extends Backbone.View
           $("##{key}").val(config[key])
           break
 
-  saveConfig: ->
+  saveSettings: ->
     config = $('form', @el).serializeObject()
 
     master = $('#master').val()

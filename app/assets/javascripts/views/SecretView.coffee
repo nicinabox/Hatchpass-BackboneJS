@@ -5,7 +5,7 @@ class window.SecretView extends Backbone.View
     'focus #secret': 'saveDomain'
 
   initialize: ->
-    app.Config.bind('change', @render, this);
+    app.Settings.bind('change', @render, this);
 
     $("#domain").autocomplete
       source: app.Domains.pluck 'url'
@@ -26,7 +26,7 @@ class window.SecretView extends Backbone.View
 
     app.Domains.create
       url: domain
-      config: app.Config.toJSON()
+      config: app.Settings.toJSON()
       used: 1
 
     $("#domain").autocomplete 'option'
@@ -34,7 +34,7 @@ class window.SecretView extends Backbone.View
 
 
   loadMaster: ->
-    $('#master').val app.Config.get 'master'
+    $('#master').val app.Settings.get 'master'
 
   focusInput: ->
     focused = false
@@ -51,7 +51,7 @@ class window.SecretView extends Backbone.View
   render: (model) ->
     if model instanceof Backbone.Model
       config = model.get 'config'
-    config ||= app.Config.toJSON()
+    config ||= app.Settings.toJSON()
 
     secret = new Secret
       master: $('#master').val()
