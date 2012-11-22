@@ -41,7 +41,7 @@
       e.preventDefault();
       $("#domain").val(this.model.get('url'));
       app.SecretView.render(this.model);
-      return $('#secret').focus();
+      return app.SecretView.focusInput();
     };
 
     return DomainView;

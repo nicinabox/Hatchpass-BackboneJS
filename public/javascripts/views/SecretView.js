@@ -28,7 +28,9 @@
 
     SecretView.prototype.saveDomain = function(e) {
       var domain, existing_domain, used;
-      e.target.setSelectionRange(0, e.target.value.length);
+      setTimeout(function() {
+        return e.target.setSelectionRange(0, e.target.value.length);
+      }, 0);
       domain = this.$('#domain').val();
       if ((existing_domain = app.Domains.where({
         url: domain
@@ -39,10 +41,13 @@
         });
         app.Domains.sort();
       }
-      return app.Domains.create({
+      app.Domains.create({
         url: domain,
         config: app.Config.toJSON(),
         used: 1
+      });
+      return $("#domain").autocomplete('option', {
+        source: app.Domains.pluck('url')
       });
     };
 
@@ -51,12 +56,18 @@
     };
 
     SecretView.prototype.focusInput = function() {
-      return $('input.required:visible', this.$el).each(function() {
+      var focused;
+      focused = false;
+      $('input.required:visible', this.$el).each(function() {
         if (!this.value.length) {
           $(this).focus();
+          focused = true;
           return false;
         }
       });
+      if (!focused) {
+        return $('#secret').focus();
+      }
     };
 
     SecretView.prototype.render = function(model) {
@@ -76,7 +87,7 @@
           $('#secret').show().attr('readonly', false);
         }
         if (model.keyCode === 13) {
-          return $('#secret').focus().select();
+          return this.focusInput();
         }
       }
     };
