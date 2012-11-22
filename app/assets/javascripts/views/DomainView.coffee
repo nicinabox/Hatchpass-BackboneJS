@@ -24,4 +24,4 @@ class window.DomainView extends Backbone.View
     # app.SwipeView.swipe.next()
     $("#domain").val @model.get 'url'
     app.SecretView.render @model
-    $('#secret').focus()
+    app.SecretView.focusInput()

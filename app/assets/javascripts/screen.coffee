@@ -34,7 +34,3 @@ $ ->
     e.preventDefault()
     $(this).parent('.help').hide()
     localStorage.help = false
-
-  $(document).on 'click', '#secret', (e) ->
-    e.preventDefault()
-    this.setSelectionRange 0, this.value.length

@@ -12,9 +12,11 @@ class window.SecretView extends Backbone.View
       autoFocus: true
 
   saveDomain: (e) ->
-    e.target.setSelectionRange 0, e.target.value.length
-    domain = this.$('#domain').val()
+    setTimeout ->
+      e.target.setSelectionRange 0, e.target.value.length
+    , 0
 
+    domain = this.$('#domain').val()
     if (existing_domain = app.Domains.where(url: domain)[0])
       used = existing_domain.get 'used'
 
@@ -27,14 +29,24 @@ class window.SecretView extends Backbone.View
       config: app.Config.toJSON()
       used: 1
 
+    $("#domain").autocomplete 'option'
+    , source: app.Domains.pluck 'url'
+
+
   loadMaster: ->
     $('#master').val app.Config.get 'master'
 
   focusInput: ->
+    focused = false
     $('input.required:visible', this.$el).each ->
       if !@value.length
         $(this).focus()
+        focused = true
         false
+
+    unless focused
+      $('#secret').focus()
+
 
   render: (model) ->
     if model instanceof Backbone.Model
@@ -53,4 +65,4 @@ class window.SecretView extends Backbone.View
         $('#secret').show().attr('readonly', false)
 
       if model.keyCode == 13
-        $('#secret').focus().select()
+        @focusInput()
