@@ -1,6 +1,5 @@
 class window.Secret extends Backbone.Model
   defaults:
-    master: ''
     domain: ''
 
   initialize: ->
@@ -17,13 +16,14 @@ class window.Secret extends Backbone.Model
         return [index, "can't be blank"]
 
   create: ->
-    config = @attributes.config
-    symbols = "!@#]^&*(%[?${+=})_-|/<>".split('')
-    domain = @attributes.domain.toLowerCase()
+    model       = @toJSON()
+    config      = model.config
+    symbols     = "!@#]^&*(%[?${+=})_-|/<>".split('')
+    domain      = model.domain.toLowerCase()
     [host, tld] = domain.split(".")
-    tld = 'com' unless tld
+    tld         = 'com' unless tld
 
-    hash = Crypto.SHA256("#{@attributes.master}:#{host}.#{tld}")
+    hash = Crypto.SHA256("#{config.master}:#{host}.#{tld}")
     hash = Crypto.SHA256("#{hash}#{config.key}").substr(0, config.length)
 
     nums = 0
@@ -31,11 +31,11 @@ class window.Secret extends Backbone.Model
     secret = hash.split(//)
     this_upper = true
 
-    for item in secret
-      if item.match(/[a-zA-Z]/) # Letters
+    for character in secret
+      if character.match(/[a-zA-Z]/) # Letters
         if config.caps == true && !this_upper
           this_upper = true
-          secret[_i] = item.match(/[a-zA-Z]/)[0].toUpperCase()
+          secret[_i] = character.match(/[a-zA-Z]/)[0].toUpperCase()
         else
           this_upper = false
       else # Numbers

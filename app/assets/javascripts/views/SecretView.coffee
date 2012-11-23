@@ -53,7 +53,6 @@ class window.SecretView extends Backbone.View
     config ||= app.Settings.toJSON()
 
     secret = new Secret
-      master: $('#master').val()
       domain: @domain.val()
       config: config
 
