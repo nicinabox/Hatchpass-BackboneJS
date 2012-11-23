@@ -1,6 +1,7 @@
 class window.SettingsView extends Backbone.View
   el: $('#settings')
   tagName: "input"
+  alert_template: _.template $('#alert-box-template').html()
   events:
     'change input': 'saveSettings'
 
@@ -8,12 +9,6 @@ class window.SettingsView extends Backbone.View
     @model.on('change', @render, this)
     @model.on('reset', @render, this)
     @model.fetch()
-    # @model.fetch(
-    #   success: (model, response) =>
-    #     @model.unset('0')
-    #     @model.set(response[0])
-    #     @model.save() if @model.isNew()
-    # )
 
   import: ->
     if localStorage.hp_settings
@@ -39,16 +34,27 @@ class window.SettingsView extends Backbone.View
       @render()
 
   render: (model) ->
-    settings = model.toJSON()
-
+    settings = model.toJSON()[0]
     for own key, value of settings
       switch $("[name=#{key}]").last().attr('type')
         when "checkbox"
-          $("[name=#{key}]").attr('checked', settings[key])
+          $("[name=#{key}]").attr('checked', value)
           break
         else
-          $("[name=#{key}]").val(settings[key])
+          $("[name=#{key}]").val(value)
           break
+
+  setAlert: (domain = "domain") ->
+    unless @isGlobal()
+      html = @alert_template
+        type: 'notice'
+        content: "Editing #{domain} settings"
+
+      this.$el.find('.alert-box').remove()
+      this.$el.prepend html
+
+  isGlobal: ->
+    _.isEmpty app.SecretView.secret.val()
 
   saveSettings: ->
     config = $('form', @el).serializeObject()

@@ -64,3 +64,5 @@ class window.SecretView extends Backbone.View
 
       if model.keyCode == 13
         @focusInput()
+
+      app.SettingsView.setAlert(@domain.val())

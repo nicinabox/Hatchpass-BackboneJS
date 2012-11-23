@@ -99,6 +99,20 @@ a {
     }
   }
 }
+.panel {
+  .alert-box {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    color: #666;
+    font-weight: bold;
+    font-size: 13px;
+    &.notice {
+      background: #fff5da;
+      border: 1px solid #ffe8a7;
+    }
+  }
+}
 .no-results {
   border: 1px dashed #ddd;
   color: #aaa;
