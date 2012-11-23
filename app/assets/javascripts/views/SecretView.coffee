@@ -5,7 +5,8 @@ class window.SecretView extends Backbone.View
     'focus #secret': 'saveDomain'
 
   initialize: ->
-    app.Settings.bind('change', @render, this);
+    app.Settings.on('change', @render, this);
+    app.Domains.on('add destroy', @updateAutocomplete, this);
 
     $("#domain").autocomplete
       source: app.Domains.pluck 'url'
@@ -29,6 +30,8 @@ class window.SecretView extends Backbone.View
       config: app.Settings.toJSON()
       used: 1
 
+  updateAutocomplete: ->
+    console.log app.Domains.pluck 'url'
     $("#domain").autocomplete 'option'
     , source: app.Domains.pluck 'url'
 
