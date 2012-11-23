@@ -13,7 +13,7 @@ class window.SecretView extends Backbone.View
 
   saveDomain: (e) ->
     setTimeout ->
-      e.target.setSelectionRange 0, e.target.value.length
+      e.target.setSelectionRange 0, e.target.value.length if e
     , 0
 
     domain = this.$('#domain').val()
@@ -31,10 +31,6 @@ class window.SecretView extends Backbone.View
 
     $("#domain").autocomplete 'option'
     , source: app.Domains.pluck 'url'
-
-
-  loadMaster: ->
-    $('#master').val app.Settings.get 'master'
 
   focusInput: ->
     focused = false
