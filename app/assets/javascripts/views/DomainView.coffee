@@ -21,6 +21,6 @@ class window.DomainView extends Backbone.View
 
   load: (e) ->
     e.preventDefault()
-    $("#domain").val @model.get 'url'
+    app.SecretView.domain.val @model.get 'url'
     app.SecretView.render @model
     app.SecretView.focusInput()

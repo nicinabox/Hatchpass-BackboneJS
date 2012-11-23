@@ -1,5 +1,7 @@
 class window.SecretView extends Backbone.View
   el: $('#new_secret form')
+  domain: $('#domain')
+  secret: $('#secret')
   events:
     'keyup input.required': 'render'
     'focus #secret': 'saveDomain'
@@ -8,7 +10,7 @@ class window.SecretView extends Backbone.View
     app.Settings.on('change', @render, this);
     app.Domains.on('add destroy', @updateAutocomplete, this);
 
-    $("#domain").autocomplete
+    @domain.autocomplete
       source: app.Domains.pluck 'url'
       autoFocus: true
 
@@ -17,7 +19,7 @@ class window.SecretView extends Backbone.View
       e.target.setSelectionRange 0, e.target.value.length if e
     , 0
 
-    domain = this.$('#domain').val()
+    domain = @domain.val()
     if (existing_domain = app.Domains.where(url: domain)[0])
       used = existing_domain.get 'used'
 
@@ -31,8 +33,7 @@ class window.SecretView extends Backbone.View
       used: 1
 
   updateAutocomplete: ->
-    console.log app.Domains.pluck 'url'
-    $("#domain").autocomplete 'option'
+    @domain.autocomplete 'option'
     , source: app.Domains.pluck 'url'
 
   focusInput: ->
@@ -44,8 +45,7 @@ class window.SecretView extends Backbone.View
         false
 
     unless focused
-      $('#secret').focus()
-
+      @secret.focus()
 
   render: (model) ->
     if model instanceof Backbone.Model
@@ -54,14 +54,14 @@ class window.SecretView extends Backbone.View
 
     secret = new Secret
       master: $('#master').val()
-      domain: $('#domain').val()
+      domain: @domain.val()
       config: config
 
     if secret
-      $('#secret').val secret.get 'secret'
+      @secret.val secret.get 'secret'
 
       if app.mobile
-        $('#secret').show().attr('readonly', false)
+        @secret.show().attr('readonly', false)
 
       if model.keyCode == 13
         @focusInput()
