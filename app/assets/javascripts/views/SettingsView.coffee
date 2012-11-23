@@ -6,12 +6,14 @@ class window.SettingsView extends Backbone.View
 
   initialize: ->
     @model.on('change', @render, this)
-    @model.fetch(
-      success: (model, response) =>
-        @model.unset('0')
-        @model.set(response[0])
-        @model.save() if @model.isNew()
-    )
+    @model.on('reset', @render, this)
+    @model.fetch()
+    # @model.fetch(
+    #   success: (model, response) =>
+    #     @model.unset('0')
+    #     @model.set(response[0])
+    #     @model.save() if @model.isNew()
+    # )
 
   import: ->
     if localStorage.hp_settings
@@ -36,15 +38,16 @@ class window.SettingsView extends Backbone.View
       console.log "Import successful"
       @render()
 
-  render: ->
-    config = @model.toJSON()
-    for own key, value of config
-      switch $("##{key}").attr('type')
+  render: (model) ->
+    settings = model.toJSON()
+
+    for own key, value of settings
+      switch $("[name=#{key}]").last().attr('type')
         when "checkbox"
-          $("##{key}").attr('checked', config[key])
+          $("[name=#{key}]").attr('checked', settings[key])
           break
         else
-          $("##{key}").val(config[key])
+          $("[name=#{key}]").val(settings[key])
           break
 
   saveSettings: ->
