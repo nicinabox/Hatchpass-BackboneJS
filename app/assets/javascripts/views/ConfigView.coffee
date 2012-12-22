@@ -1,7 +1,6 @@
 class App.Views.ConfigView extends Backbone.View
   el: $('#config')
   tagName: "input"
-  model: new App.Models.Config
   alert_template: _.template $('#alert-box-template').html()
   events:
     'change input': 'saveConfig'
@@ -9,7 +8,16 @@ class App.Views.ConfigView extends Backbone.View
   initialize: ->
     @model.on('change', @render, this)
     @model.on('reset', @render, this)
-    @model.fetch()
+    @model.fetch
+      success: (model, resp) =>
+        unless _.isEmpty resp
+          delete @model.attributes[0]
+          @model.set resp[0]
+
+      error: (model, resp) =>
+        unless resp
+          @render(@model)
+
 
   import: ->
     if localStorage.hp_config
@@ -36,7 +44,7 @@ class App.Views.ConfigView extends Backbone.View
 
   render: (model) ->
     config = model.toJSON()
-    console.log config
+
     for own key, value of config
       switch $("[name=#{key}]").last().attr('type')
         when "checkbox"
@@ -56,13 +64,13 @@ class App.Views.ConfigView extends Backbone.View
       this.$el.prepend html
 
   isGlobal: ->
-    _.isEmpty app.SecretView.secret.val()
+    _.isEmpty App.secret_view.secret.val()
 
   saveConfig: ->
-    config = $('form', @el).serializeObject()
+    config = this.$('form').serializeObject()
 
     master = $('#master').val()
-    if master.length > 0
+    if master.length
       config.master = $('#master').val()
 
     @model.set config
@@ -73,9 +81,9 @@ class App.Views.ConfigView extends Backbone.View
         @model.save config
 
       else
-        domain = app.SecretView.domain.val()
-        if (domain = app.Domains.where(url: domain)[0])
-          console.log 'saving config for domain'
+        domain = App.secret_view.domain.val()
+        if (domain = App.domains.where(url: domain)[0])
+          console.log 'saving config for MODEL'
           domain.save config: config
     else
       @model.destroy()

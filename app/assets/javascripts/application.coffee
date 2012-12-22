@@ -11,6 +11,7 @@ $ ->
 
   # Views
   App.config_view = new App.Views.ConfigView
+    model: App.config
 
   App.domains_view = new App.Views.DomainsView
   App.secret_view = new App.Views.SecretView
