@@ -652,25 +652,25 @@ a {
   width: 70%;
 }
 
-#settings {
+#config {
   display: none;
 }
-#settings form .field {
+#config form .field {
   padding: 5px 20px;
 }
-#settings form label {
+#config form label {
   display: block;
   float: left;
   width: 50%;
 }
-#settings form input {
+#config form input {
   width: 50%;
   float: right;
 }
-#settings form .onoffswitch {
+#config form .onoffswitch {
   float: right;
 }
-#settings form .onoffswitch label {
+#config form .onoffswitch label {
   width: auto;
 }
 
@@ -723,6 +723,19 @@ a {
 .panel-nav a.active {
   color: #666;
   border-color: #aaa;
+}
+
+.panel .alert-box {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  color: #666;
+  font-weight: bold;
+  font-size: 13px;
+}
+.panel .alert-box.notice {
+  background: #fff5da;
+  border: 1px solid #ffe8a7;
 }
 
 .no-results {
