@@ -7,7 +7,7 @@ class App.Views.SecretView extends Backbone.View
     'focus #secret': 'saveDomain'
 
   initialize: ->
-    App.settings.on('change', @render, this);
+    App.config.on('change', @render, this);
     App.domains.on('add destroy', @updateAutocomplete, this);
 
     @domain.autocomplete
@@ -54,7 +54,7 @@ class App.Views.SecretView extends Backbone.View
       config = model.get 'config'
       # console.log config
 
-    config ||= App.settings.toJSON()
+    config ||= App.config.toJSON()
     # console.log config.length
 
     secret = new Secret

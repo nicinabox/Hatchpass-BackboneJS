@@ -18,7 +18,7 @@ Modernizr.load [
   "/javascripts/jquery.addons.js",
 
   # Models
-  "/javascripts/models/Settings.js",
+  "/javascripts/models/Config.js",
   "/javascripts/models/Domain.js",
   "/javascripts/models/Secret.js",
 
@@ -26,7 +26,7 @@ Modernizr.load [
   "/javascripts/collections/Domains.js",
 
   # Views
-  "/javascripts/views/SettingsView.js",
+  "/javascripts/views/ConfigView.js",
   "/javascripts/views/DomainsView.js",
   "/javascripts/views/DomainView.js",
   "/javascripts/views/SecretView.js",

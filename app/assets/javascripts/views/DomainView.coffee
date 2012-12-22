@@ -25,4 +25,4 @@ class App.Views.DomainView extends Backbone.View
     App.secret_view.domain.val @model.get 'url'
     App.secret_view.render @model
     App.secret_view.focusInput()
-    App.settings_view.render @model
+    App.config_view.render @model

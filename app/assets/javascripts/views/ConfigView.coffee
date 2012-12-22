@@ -1,9 +1,10 @@
-class App.Views.SettingsView extends Backbone.View
-  el: $('#settings')
+class App.Views.ConfigView extends Backbone.View
+  el: $('#config')
   tagName: "input"
+  model: new App.Models.Config
   alert_template: _.template $('#alert-box-template').html()
   events:
-    'change input': 'saveSettings'
+    'change input': 'saveConfig'
 
   initialize: ->
     @model.on('change', @render, this)
@@ -11,31 +12,32 @@ class App.Views.SettingsView extends Backbone.View
     @model.fetch()
 
   import: ->
-    if localStorage.hp_settings
+    if localStorage.hp_config
       import_key = localStorage.hp_key
-      import_settings = JSON.parse(localStorage.hp_settings)
+      import_config = JSON.parse(localStorage.hp_config)
       import_master = localStorage.hp_master
 
-      import_settings.save_settings = import_settings.remember
-      delete import_settings.remember
-      delete import_settings.algorithm
+      import_config.save_config = import_config.remember
+      delete import_config.remember
+      delete import_config.algorithm
 
       @model.set(
         master: import_master
         key: import_key
       )
-      @model.set(import_settings)
+      @model.set(import_config)
       @model.save()
 
       localStorage.removeItem('hp_key')
-      localStorage.removeItem('hp_settings')
+      localStorage.removeItem('hp_config')
       localStorage.removeItem('hp_master')
       console.log "Import successful"
       @render()
 
   render: (model) ->
-    settings = model.toJSON()[0]
-    for own key, value of settings
+    config = model.toJSON()
+    console.log config
+    for own key, value of config
       switch $("[name=#{key}]").last().attr('type')
         when "checkbox"
           $("[name=#{key}]").attr('checked', value)
@@ -48,7 +50,7 @@ class App.Views.SettingsView extends Backbone.View
     unless @isGlobal()
       html = @alert_template
         type: 'notice'
-        content: "Editing #{domain} settings"
+        content: "Editing #{domain} config"
 
       this.$el.find('.alert-box').remove()
       this.$el.prepend html
@@ -56,7 +58,7 @@ class App.Views.SettingsView extends Backbone.View
   isGlobal: ->
     _.isEmpty app.SecretView.secret.val()
 
-  saveSettings: ->
+  saveConfig: ->
     config = $('form', @el).serializeObject()
 
     master = $('#master').val()
@@ -66,6 +68,14 @@ class App.Views.SettingsView extends Backbone.View
     @model.set config
 
     if config.save_all
-      @model.save config
+      if @isGlobal()
+        console.log 'saving config GLOBALY'
+        @model.save config
+
+      else
+        domain = app.SecretView.domain.val()
+        if (domain = app.Domains.where(url: domain)[0])
+          console.log 'saving config for domain'
+          domain.save config: config
     else
       @model.destroy()
