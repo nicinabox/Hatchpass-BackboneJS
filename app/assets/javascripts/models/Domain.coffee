@@ -5,7 +5,7 @@ class App.Models.Domain extends Backbone.Model
 
   validate: (domain) ->
     errors = []
-    domains = app.Domains.pluck('url')
+    domains = App.domains.pluck('url')
 
     if !domain.id and _.include domains, domain.url
       errors.push "URL must be unique"
