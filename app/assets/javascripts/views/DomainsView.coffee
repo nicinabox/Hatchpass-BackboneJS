@@ -1,19 +1,19 @@
-class window.DomainsView extends Backbone.View
+class App.Views.DomainsView extends Backbone.View
   el: $('#domains')
 
   initialize: ->
-    app.Domains.on('add', @addDomain, this)
-    app.Domains.on('reset', @addAllDomains, this)
-    app.Domains.fetch()
+    App.domains.on('add', @addDomain, this)
+    App.domains.on('reset', @addAllDomains, this)
+    App.domains.fetch()
 
   addDomain: (domain) ->
-    if app.Domains.length
+    if App.domains.length
       this.$el.find('.no-results').hide()
 
-    view = new DomainView
+    view = new App.Views.DomainView
       model: domain
     this.$('ul').prepend view.render().el
 
   addAllDomains: ->
     this.$('ul li').not('.no-results').remove()
-    app.Domains.each @addDomain, this
+    App.domains.each @addDomain, this

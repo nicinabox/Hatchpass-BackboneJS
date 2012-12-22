@@ -2,22 +2,15 @@ window.addEventListener 'load', ->
   new FastClick document.body
 , false
 
-window.app ||= {
-  mobile: (/mobile/i).test(navigator.userAgent)
-}
-
 $ ->
-
   # Models
-  app.Settings = new Settings
+  App.settings = new App.Models.Settings
 
   # Collections
-  app.Domains = new Domains
+  App.domains = new App.Collections.Domains
 
   # Views
-  app.SettingsView = new SettingsView
-    model: app.Settings
+  App.settings_view = new App.Views.SettingsView
 
-  app.DomainsView = new DomainsView
-  app.SecretView = new SecretView
-  # app.SwipeView = new SwipeView
+  App.domains_view = new App.Views.DomainsView
+  App.secret_view = new App.Views.SecretView

@@ -1,4 +1,4 @@
-class window.SwipeView extends Backbone.View
+class App.Views.SwipeView extends Backbone.View
   el: $('.panel-nav')
   active_panel: 1
   events:

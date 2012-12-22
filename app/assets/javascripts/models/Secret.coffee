@@ -1,4 +1,4 @@
-class window.Secret extends Backbone.Model
+class App.Models.Secret extends Backbone.Model
   defaults:
     domain: ''
 

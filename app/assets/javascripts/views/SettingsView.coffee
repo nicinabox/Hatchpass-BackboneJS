@@ -1,4 +1,4 @@
-class window.SettingsView extends Backbone.View
+class App.Views.SettingsView extends Backbone.View
   el: $('#settings')
   tagName: "input"
   alert_template: _.template $('#alert-box-template').html()

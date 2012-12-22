@@ -1,4 +1,4 @@
-class window.DomainView extends Backbone.View
+class App.Views.DomainView extends Backbone.View
   tagName: 'li'
   template: _.template $('#recent-domain-template').html()
   events:
@@ -16,11 +16,13 @@ class window.DomainView extends Backbone.View
     e.preventDefault();
     @model.destroy()
 
-    unless app.Domains.length
-      app.DomainsView.$el.find('.no-results').show()
+    unless App.domains.length
+      App.domains_view.$el.find('.no-results').show()
 
   load: (e) ->
     e.preventDefault()
-    app.SecretView.domain.val @model.get 'url'
-    app.SecretView.render @model
-    app.SecretView.focusInput()
+    console.log @model.toJSON()
+    App.secret_view.domain.val @model.get 'url'
+    App.secret_view.render @model
+    App.secret_view.focusInput()
+    App.settings_view.render @model

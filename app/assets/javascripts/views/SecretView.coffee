@@ -1,4 +1,4 @@
-class window.SecretView extends Backbone.View
+class App.Views.SecretView extends Backbone.View
   el: $('#new_secret form')
   domain: $('#domain')
   secret: $('#secret')
@@ -7,11 +7,11 @@ class window.SecretView extends Backbone.View
     'focus #secret': 'saveDomain'
 
   initialize: ->
-    app.Settings.on('change', @render, this);
-    app.Domains.on('add destroy', @updateAutocomplete, this);
+    App.settings.on('change', @render, this);
+    App.domains.on('add destroy', @updateAutocomplete, this);
 
     @domain.autocomplete
-      source: app.Domains.pluck 'url'
+      source: App.domains.pluck 'url'
       autoFocus: true
 
   saveDomain: (e) ->
@@ -20,21 +20,21 @@ class window.SecretView extends Backbone.View
     , 0
 
     domain = @domain.val()
-    if (existing_domain = app.Domains.where(url: domain)[0])
+    if (existing_domain = App.domains.where(url: domain)[0])
       used = existing_domain.get 'used'
 
       existing_domain.save
         used: (if used then used + 1 else 1)
-      app.Domains.sort()
+      App.domains.sort()
 
-    app.Domains.create
+    App.domains.create
       url: domain
-      config: app.Settings.toJSON()
+      config: App.Settings.toJSON()
       used: 1
 
   updateAutocomplete: ->
     @domain.autocomplete 'option'
-    , source: app.Domains.pluck 'url'
+    , source: App.domains.pluck 'url'
 
   focusInput: ->
     focused = false
@@ -49,8 +49,13 @@ class window.SecretView extends Backbone.View
 
   render: (model) ->
     if model instanceof Backbone.Model
+      # console.log 'load config from model'
+
       config = model.get 'config'
-    config ||= app.Settings.toJSON()
+      # console.log config
+
+    config ||= App.settings.toJSON()
+    # console.log config.length
 
     secret = new Secret
       domain: @domain.val()
@@ -59,10 +64,10 @@ class window.SecretView extends Backbone.View
     if secret
       @secret.val secret.get 'secret'
 
-      if app.mobile
+      if App.mobile
         @secret.show().attr('readonly', false)
 
       if model.keyCode == 13
         @focusInput()
 
-      app.SettingsView.setAlert(@domain.val())
+      App.SettingsView.setAlert(@domain.val())

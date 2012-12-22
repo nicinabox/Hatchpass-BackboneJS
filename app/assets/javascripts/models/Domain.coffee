@@ -1,4 +1,4 @@
-class window.Domain extends Backbone.Model
+class App.Models.Domain extends Backbone.Model
   initialize: ->
     @bind 'error', (model, errors) ->
       # console.log errors

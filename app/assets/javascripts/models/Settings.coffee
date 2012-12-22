@@ -1,5 +1,5 @@
-class window.Settings extends Backbone.Model
-  localStorage: new Store("settings")
+class App.Models.Settings extends Backbone.Model
+  localStorage: new Backbone.LocalStorage('settings')
   defaults:
     key: ''
     length: 10
