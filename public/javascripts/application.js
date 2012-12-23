@@ -8,7 +8,9 @@
   $(function() {
     App.config = new App.Models.Config;
     App.domains = new App.Collections.Domains;
-    App.config_view = new App.Views.ConfigView;
+    App.config_view = new App.Views.ConfigView({
+      model: App.config
+    });
     App.domains_view = new App.Views.DomainsView;
     return App.secret_view = new App.Views.SecretView;
   });

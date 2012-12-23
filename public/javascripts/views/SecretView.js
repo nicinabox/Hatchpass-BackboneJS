@@ -23,8 +23,8 @@
     };
 
     SecretView.prototype.initialize = function() {
-      App.config.on('change', this.render, this);
-      App.domains.on('add destroy', this.updateAutocomplete, this);
+      this.listenTo(App.config, 'change', this.render);
+      this.listenTo(App.domains, 'add destroy', this.updateAutocomplete);
       return this.domain.autocomplete({
         source: App.domains.pluck('url'),
         autoFocus: true
@@ -39,9 +39,10 @@
         }
       }, 0);
       domain = this.domain.val();
-      if ((existing_domain = App.domains.where({
+      existing_domain = App.domains.where({
         url: domain
-      })[0])) {
+      })[0];
+      if (existing_domain) {
         used = existing_domain.get('used');
         existing_domain.save({
           used: (used ? used + 1 : 1)
@@ -50,8 +51,10 @@
       }
       return App.domains.create({
         url: domain,
-        config: App.Settings.toJSON(),
+        config: App.config.toJSON(),
         used: 1
+      }, {
+        wait: true
       });
     };
 
@@ -79,10 +82,11 @@
     SecretView.prototype.render = function(model) {
       var config, secret;
       if (model instanceof Backbone.Model) {
+        console.log('load config from model');
         config = model.get('config');
       }
       config || (config = App.config.toJSON());
-      secret = new Secret({
+      secret = new App.Models.Secret({
         domain: this.domain.val(),
         config: config
       });
@@ -94,7 +98,7 @@
         if (model.keyCode === 13) {
           this.focusInput();
         }
-        return App.SettingsView.setAlert(this.domain.val());
+        return App.config_view.setAlert(this.domain.val());
       }
     };
 

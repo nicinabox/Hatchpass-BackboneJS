@@ -15,8 +15,6 @@
 
     ConfigView.prototype.tagName = "input";
 
-    ConfigView.prototype.model = new App.Models.Config;
-
     ConfigView.prototype.alert_template = _.template($('#alert-box-template').html());
 
     ConfigView.prototype.events = {
@@ -24,9 +22,44 @@
     };
 
     ConfigView.prototype.initialize = function() {
-      this.model.on('change', this.render, this);
-      this.model.on('reset', this.render, this);
-      return this.model.fetch();
+      var _this = this;
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'reset', this.render);
+      return this.model.fetch({
+        success: function(model, resp) {
+          if (!_.isEmpty(resp)) {
+            delete _this.model.attributes[0];
+            return _this.model.set(resp[0]);
+          }
+        },
+        error: function(model, resp) {
+          if (!resp) {
+            return _this.render(_this.model);
+          }
+        }
+      });
+    };
+
+    ConfigView.prototype.render = function(model) {
+      var config, key, value, _results;
+      config = model.toJSON();
+      if (config.config) {
+        config = config.config;
+      }
+      _results = [];
+      for (key in config) {
+        if (!__hasProp.call(config, key)) continue;
+        value = config[key];
+        switch ($("[name=" + key + "]").last().attr('type')) {
+          case "checkbox":
+            $("[name=" + key + "]").attr('checked', value);
+            break;
+          default:
+            $("[name=" + key + "]").val(value);
+            break;
+        }
+      }
+      return _results;
     };
 
     ConfigView.prototype["import"] = function() {
@@ -52,26 +85,6 @@
       }
     };
 
-    ConfigView.prototype.render = function(model) {
-      var config, key, value, _results;
-      config = model.toJSON();
-      console.log(config);
-      _results = [];
-      for (key in config) {
-        if (!__hasProp.call(config, key)) continue;
-        value = config[key];
-        switch ($("[name=" + key + "]").last().attr('type')) {
-          case "checkbox":
-            $("[name=" + key + "]").attr('checked', value);
-            break;
-          default:
-            $("[name=" + key + "]").val(value);
-            break;
-        }
-      }
-      return _results;
-    };
-
     ConfigView.prototype.setAlert = function(domain) {
       var html;
       if (domain == null) {
@@ -88,14 +101,14 @@
     };
 
     ConfigView.prototype.isGlobal = function() {
-      return _.isEmpty(app.SecretView.secret.val());
+      return _.isEmpty(App.secret_view.secret.val());
     };
 
     ConfigView.prototype.saveConfig = function() {
       var config, domain, master;
-      config = $('form', this.el).serializeObject();
+      config = this.$('form').serializeObject();
       master = $('#master').val();
-      if (master.length > 0) {
+      if (master.length) {
         config.master = $('#master').val();
       }
       this.model.set(config);
@@ -104,11 +117,11 @@
           console.log('saving config GLOBALY');
           return this.model.save(config);
         } else {
-          domain = app.SecretView.domain.val();
-          if ((domain = app.Domains.where({
+          domain = App.secret_view.domain.val();
+          if ((domain = App.domains.where({
             url: domain
           })[0])) {
-            console.log('saving config for domain');
+            console.log('saving config for MODEL');
             return domain.save({
               config: config
             });

@@ -18,7 +18,7 @@
     Domain.prototype.validate = function(domain) {
       var domains, errors;
       errors = [];
-      domains = app.Domains.pluck('url');
+      domains = App.domains.pluck('url');
       if (!domain.id && _.include(domains, domain.url)) {
         errors.push("URL must be unique");
       }

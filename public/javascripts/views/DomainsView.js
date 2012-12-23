@@ -14,8 +14,8 @@
     DomainsView.prototype.el = $('#domains');
 
     DomainsView.prototype.initialize = function() {
-      App.domains.on('add', this.addDomain, this);
-      App.domains.on('reset', this.addAllDomains, this);
+      this.listenTo(App.domains, 'add', this.addDomain);
+      this.listenTo(App.domains, 'reset', this.addAllDomains);
       return App.domains.fetch();
     };
 

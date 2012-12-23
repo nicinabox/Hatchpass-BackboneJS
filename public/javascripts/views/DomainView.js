@@ -21,7 +21,7 @@
     };
 
     DomainView.prototype.initialize = function() {
-      return this.model.on('destroy', this.remove, this);
+      return this.listenTo(this.model, 'destroy', this.remove);
     };
 
     DomainView.prototype.render = function(html) {
@@ -39,7 +39,6 @@
 
     DomainView.prototype.load = function(e) {
       e.preventDefault();
-      console.log(this.model.toJSON());
       App.secret_view.domain.val(this.model.get('url'));
       App.secret_view.render(this.model);
       App.secret_view.focusInput();

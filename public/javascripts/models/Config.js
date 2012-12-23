@@ -13,18 +13,14 @@
 
     Config.prototype.localStorage = new Backbone.LocalStorage('config');
 
-    Config.prototype.defaults = {
-      key: '',
-      length: 10,
-      caps: true,
-      symbols: true,
-      save_all: false
-    };
-
-    Config.prototype.initialize = function() {
-      return this.set({
-        key: this.newKey()
-      });
+    Config.prototype.defaults = function() {
+      return {
+        key: this.newKey(),
+        length: 10,
+        caps: true,
+        symbols: true,
+        save_all: false
+      };
     };
 
     Config.prototype.newKey = function() {
