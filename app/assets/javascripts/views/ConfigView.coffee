@@ -6,8 +6,9 @@ class App.Views.ConfigView extends Backbone.View
     'change input': 'saveConfig'
 
   initialize: ->
-    @model.on('change', @render, this)
-    @model.on('reset', @render, this)
+    @listenTo @model, 'change', @render
+    @listenTo @model, 'reset', @render
+
     @model.fetch
       success: (model, resp) =>
         unless _.isEmpty resp

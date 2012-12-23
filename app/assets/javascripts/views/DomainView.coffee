@@ -6,14 +6,14 @@ class App.Views.DomainView extends Backbone.View
     'click .domain': 'load'
 
   initialize: ->
-    @model.on('destroy', @remove, this);
+    @listenTo @model, 'destroy', @remove
 
   render: (html) ->
-    this.$el.html @template @model.toJSON()
+    this.$el.html @template(@model.toJSON())
     this
 
   clear: (e) ->
-    e.preventDefault();
+    e.preventDefault()
     @model.destroy()
 
     unless App.domains.length
@@ -21,7 +21,6 @@ class App.Views.DomainView extends Backbone.View
 
   load: (e) ->
     e.preventDefault()
-    console.log @model.toJSON()
     App.secret_view.domain.val @model.get 'url'
     App.secret_view.render @model
     App.secret_view.focusInput()

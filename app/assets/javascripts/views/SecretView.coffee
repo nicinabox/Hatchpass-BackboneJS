@@ -7,8 +7,8 @@ class App.Views.SecretView extends Backbone.View
     'focus #secret': 'saveDomain'
 
   initialize: ->
-    App.config.on('change', @render, this);
-    App.domains.on('add destroy', @updateAutocomplete, this);
+    @listenTo App.config, 'change', @render
+    @listenTo App.domains, 'add destroy', @updateAutocomplete
 
     @domain.autocomplete
       source: App.domains.pluck 'url'

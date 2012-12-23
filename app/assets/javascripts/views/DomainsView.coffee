@@ -2,8 +2,8 @@ class App.Views.DomainsView extends Backbone.View
   el: $('#domains')
 
   initialize: ->
-    App.domains.on('add', @addDomain, this)
-    App.domains.on('reset', @addAllDomains, this)
+    @listenTo App.domains, 'add', @addDomain
+    @listenTo App.domains, 'reset', @addAllDomains
     App.domains.fetch()
 
   addDomain: (domain) ->
