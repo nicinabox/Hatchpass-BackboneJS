@@ -19,6 +19,18 @@ class App.Views.ConfigView extends Backbone.View
         unless resp
           @render(@model)
 
+  render: (model) ->
+    config = model.toJSON()
+    config = config.config if config.config
+
+    for own key, value of config
+      switch $("[name=#{key}]").last().attr('type')
+        when "checkbox"
+          $("[name=#{key}]").attr('checked', value)
+          break
+        else
+          $("[name=#{key}]").val(value)
+          break
 
   import: ->
     if localStorage.hp_config
@@ -42,18 +54,6 @@ class App.Views.ConfigView extends Backbone.View
       localStorage.removeItem('hp_master')
       console.log "Import successful"
       @render()
-
-  render: (model) ->
-    config = model.toJSON()
-
-    for own key, value of config
-      switch $("[name=#{key}]").last().attr('type')
-        when "checkbox"
-          $("[name=#{key}]").attr('checked', value)
-          break
-        else
-          $("[name=#{key}]").val(value)
-          break
 
   setAlert: (domain = "domain") ->
     unless @isGlobal()
