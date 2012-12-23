@@ -20,7 +20,9 @@ class App.Views.SecretView extends Backbone.View
     , 0
 
     domain = @domain.val()
-    if (existing_domain = App.domains.where(url: domain)[0])
+    existing_domain = App.domains.where(url: domain)[0]
+
+    if (existing_domain)
       used = existing_domain.get 'used'
 
       existing_domain.save
@@ -29,8 +31,9 @@ class App.Views.SecretView extends Backbone.View
 
     App.domains.create
       url: domain
-      config: App.Settings.toJSON()
+      config: App.config.toJSON()
       used: 1
+    , wait: true
 
   updateAutocomplete: ->
     @domain.autocomplete 'option'
@@ -48,16 +51,15 @@ class App.Views.SecretView extends Backbone.View
       @secret.focus()
 
   render: (model) ->
+    # console.log model, model instanceof Backbone.Model
     if model instanceof Backbone.Model
-      # console.log 'load config from model'
-
+      console.log 'load config from model'
       config = model.get 'config'
       # console.log config
 
     config ||= App.config.toJSON()
-    # console.log config.length
 
-    secret = new Secret
+    secret = new App.Models.Secret
       domain: @domain.val()
       config: config
 
@@ -70,4 +72,4 @@ class App.Views.SecretView extends Backbone.View
       if model.keyCode == 13
         @focusInput()
 
-      App.SettingsView.setAlert(@domain.val())
+      App.config_view.setAlert(@domain.val())
