@@ -23,7 +23,6 @@ class App.Views.DomainView extends Backbone.View
   load: (e) ->
     e.preventDefault()
     App.swipe_view.swipe.next() if App.mobile
-    App.secret_view.domain.val @model.get 'url'
-    App.secret_view.render @model
+    App.secret_view.domain.val(@model.get('url')).trigger('change')
     App.config_view.render @model
     App.secret_view.focusInput()
