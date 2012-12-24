@@ -26,17 +26,6 @@
 
     SwipeView.prototype.animated = function(e, index, el) {};
 
-    SwipeView.prototype.animate = function(e) {
-      var direction;
-      e.preventDefault();
-      direction = $(e.target).data('direction');
-      if (direction === 'next') {
-        return this.swipe.next();
-      } else {
-        return this.swipe.prev();
-      }
-    };
-
     return SwipeView;
 
   })(Backbone.View);
