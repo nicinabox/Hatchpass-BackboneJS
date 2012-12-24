@@ -25,4 +25,4 @@ $ ->
   App.domains_view = new App.Views.DomainsView
   App.secret_view = new App.Views.SecretView
 
-  App.swipe_view = new App.Views.SwipeView if App.mobile
+  App.swipe_view = new App.Views.SwipeView

@@ -107,9 +107,17 @@ a {
     color: #666;
     font-weight: bold;
     font-size: 13px;
+    position: relative;
     &.notice {
       background: #fff5da;
       border: 1px solid #ffe8a7;
+    }
+    .close {
+      text-decoration: none;
+      color: #aaa;
+      position: absolute;
+      right: 10px;
+      top: 10px;
     }
   }
 }
@@ -145,12 +153,13 @@ input {
   width: 100%;
   padding: 8px;
   @include border-radius(3px);
-  @include box-shadow(#ddd 0 1px 2px inset);
+  @include box-shadow(#eee 0 1px 2px inset);
   border: 1px solid #ddd;
   background: #fafafa;
   outline: none;
   @include transition(background 0.15s ease-out);
   margin-bottom: 10px;
+  -webkit-appearance: none;
   &:focus {
     background: #fff;
   }

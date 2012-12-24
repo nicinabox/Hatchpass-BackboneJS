@@ -3,6 +3,7 @@ class App.Views.SecretView extends Backbone.View
   domain: $('#domain')
   secret: $('#secret')
   events:
+    'reset': 'render'
     'keyup input.required': 'render'
     'focus #secret': 'saveDomain'
 
