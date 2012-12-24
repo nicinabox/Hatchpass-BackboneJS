@@ -14,7 +14,8 @@ class App.Views.DomainView extends Backbone.View
 
   clear: (e) ->
     e.preventDefault()
-    @model.destroy()
+    if confirm "Are you sure you want to remove #{@model.get('url')}?"
+      @model.destroy()
 
     unless App.domains.length
       App.domains_view.$el.find('.no-results').show()
