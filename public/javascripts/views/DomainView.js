@@ -41,7 +41,9 @@
 
     DomainView.prototype.load = function(e) {
       e.preventDefault();
-      App.swipe_view.swipe.next();
+      if (App.mobile) {
+        App.swipe_view.swipe.next();
+      }
       App.secret_view.domain.val(this.model.get('url'));
       App.secret_view.render(this.model);
       App.config_view.render(this.model);

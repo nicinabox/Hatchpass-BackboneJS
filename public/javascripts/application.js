@@ -25,9 +25,7 @@
     });
     App.domains_view = new App.Views.DomainsView;
     App.secret_view = new App.Views.SecretView;
-    if (App.mobile) {
-      return App.swipe_view = new App.Views.SwipeView;
-    }
+    return App.swipe_view = new App.Views.SwipeView;
   });
 
 }).call(this);

@@ -18,7 +18,8 @@
     ConfigView.prototype.alert_template = _.template($('#alert-box-template').html());
 
     ConfigView.prototype.events = {
-      'change input': 'saveConfig'
+      'change input': 'saveConfig',
+      'click .alert-box .close': 'clear'
     };
 
     ConfigView.prototype.initialize = function() {
@@ -38,6 +39,12 @@
           }
         }
       });
+    };
+
+    ConfigView.prototype.clear = function(e) {
+      e.preventDefault();
+      App.secret_view.el.reset();
+      return this.setAlert();
     };
 
     ConfigView.prototype.render = function(model) {
@@ -95,7 +102,7 @@
       } else {
         html = this.alert_template({
           type: 'notice',
-          content: "Editing " + domain + " config"
+          content: "Editing " + domain + " config <a href='#' class='close'>&times;</a>"
         });
       }
       this.$('.alert-box').remove();

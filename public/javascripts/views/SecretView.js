@@ -18,6 +18,7 @@
     SecretView.prototype.secret = $('#secret');
 
     SecretView.prototype.events = {
+      'reset': 'render',
       'keyup input.required': 'render',
       'focus #secret': 'saveDomain'
     };
