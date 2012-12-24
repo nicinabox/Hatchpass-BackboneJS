@@ -50,9 +50,9 @@ class App.Views.SecretView extends Backbone.View
     unless focused
       @secret.focus()
 
-  render: (model) ->
-    if model instanceof Backbone.Model
-      console.log 'load config from model'
+  render: (event) ->
+    if event instanceof Backbone.Model
+      model  = event
       config = model.get 'config'
 
     config ||= App.config.toJSON()
@@ -61,14 +61,12 @@ class App.Views.SecretView extends Backbone.View
       domain: @domain.val()
       config: config
 
-    # console.log secret.attributes
-
     @secret.val secret.get 'secret'
 
     if App.mobile
       @secret.show().attr('readonly', false)
 
-    if model.keyCode == 13
+    if event.keyCode == 13
       @focusInput()
 
     App.config_view.setAlert(@domain.val())
