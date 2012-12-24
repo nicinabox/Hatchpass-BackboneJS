@@ -31,6 +31,13 @@
     <%= yield %>
   </div>
 
+  <script type="text/template" id="recent-domain-template">
+    <a href='#${url}' class='domain'>
+      ${url}
+    </a>
+    <a href='#remove' class='remove'>&times;</a>
+  </script>
+
   <script type="text/javascript">
     var _gauges = _gauges || [];
     (function() {
