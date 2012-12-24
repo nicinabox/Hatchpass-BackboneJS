@@ -41,24 +41,26 @@
           return e.target.setSelectionRange(0, e.target.value.length);
         }
       }, 0);
-      domain = this.domain.val();
-      existing_domain = App.domains.where({
-        url: domain
-      })[0];
-      if (existing_domain) {
-        used = existing_domain.get('used');
-        existing_domain.save({
-          used: (used ? used + 1 : 1)
+      if (App.config.get('save_all')) {
+        domain = this.domain.val();
+        existing_domain = App.domains.where({
+          url: domain
+        })[0];
+        if (existing_domain) {
+          used = existing_domain.get('used');
+          existing_domain.save({
+            used: (used ? used + 1 : 1)
+          });
+          App.domains.sort();
+        }
+        return App.domains.create({
+          url: domain,
+          config: App.config.toJSON(),
+          used: 1
+        }, {
+          wait: true
         });
-        App.domains.sort();
       }
-      return App.domains.create({
-        url: domain,
-        config: App.config.toJSON(),
-        used: 1
-      }, {
-        wait: true
-      });
     };
 
     SecretView.prototype.updateAutocomplete = function() {

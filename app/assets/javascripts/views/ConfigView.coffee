@@ -93,3 +93,4 @@ class App.Views.ConfigView extends Backbone.View
           domain.save config: config
     else
       @model.destroy()
+      localStorage.clear()

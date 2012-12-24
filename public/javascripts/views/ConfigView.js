@@ -135,7 +135,8 @@
           }
         }
       } else {
-        return this.model.destroy();
+        this.model.destroy();
+        return localStorage.clear();
       }
     };
 
