@@ -12,11 +12,3 @@ class App.Views.SwipeView extends Backbone.View
     @animated()
 
   animated: (e, index, el) ->
-
-  animate: (e) ->
-    e.preventDefault()
-    direction = $(e.target).data('direction')
-    if direction == 'next'
-      @swipe.next()
-    else
-      @swipe.prev()
