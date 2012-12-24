@@ -850,7 +850,18 @@ hr {
 
   #main {
     display: block;
-    border-left: 5px solid #999;
+    border-left: 1px solid #ddd;
+    position: relative;
+  }
+  #main:before {
+    content: " ";
+    background: url('../images/dots.png?1356325921') center left repeat-y;
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    width: 16px;
+    height: 48px;
+    margin-top: -48px;
   }
   #main .field {
     width: 100%;

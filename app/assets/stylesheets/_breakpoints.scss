@@ -12,7 +12,18 @@
   }
   #main {
     display: block;
-    border-left: 5px solid #999;
+    border-left: 1px solid #ddd;
+    position: relative;
+    &:before {
+      content: " ";
+      background: image-url('dots.png') center left repeat-y;
+      position: absolute;
+      top: 50%;
+      left: 0px;
+      width: 16px;
+      height: 48px;
+      margin-top: -48px;
+    }
     .field {
       width: 100%;
     }
