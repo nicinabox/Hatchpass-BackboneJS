@@ -20,7 +20,9 @@
     SecretView.prototype.events = {
       'reset': 'render',
       'keyup input.required': 'render',
-      'focus #secret': 'saveDomain'
+      'change input.required': 'render',
+      'focus #secret': 'saveDomain',
+      'click .clear': 'clearInput'
     };
 
     SecretView.prototype.initialize = function() {
@@ -80,11 +82,22 @@
       }
     };
 
+    SecretView.prototype.clearInput = function(e) {
+      e.preventDefault();
+      return $(e.target).next('input').val('').trigger('change');
+    };
+
     SecretView.prototype.render = function(event) {
       var config, model, secret;
       if (event instanceof Backbone.Model) {
         model = event;
         config = model.get('config');
+      } else {
+        if ($(event.target).val().length) {
+          $(event.target).prev('.clear').fadeIn('fast');
+        } else {
+          $(event.target).prev('.clear').fadeOut('fast');
+        }
       }
       config || (config = App.config.toJSON());
       secret = new App.Models.Secret({

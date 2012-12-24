@@ -769,6 +769,19 @@ a {
 form .field {
   overflow: hidden;
   *zoom: 1;
+  position: relative;
+}
+form .field .clear {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 4px 8px;
+  display: none;
+  line-height: 1;
+  color: #aaa;
+  text-decoration: none;
 }
 form label {
   font-size: 14px;
