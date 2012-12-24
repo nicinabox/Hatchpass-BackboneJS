@@ -8,6 +8,7 @@ class App.Views.ConfigView extends Backbone.View
   initialize: ->
     @listenTo @model, 'change', @render
     @listenTo @model, 'reset', @render
+    # @listenTo App.secret_view, 'empty', @render
 
     @model.fetch
       success: (model, resp) =>
@@ -56,13 +57,15 @@ class App.Views.ConfigView extends Backbone.View
       @render()
 
   setAlert: (domain = "domain") ->
-    unless @isGlobal()
+    if @isGlobal()
+      html = ''
+    else
       html = @alert_template
         type: 'notice'
         content: "Editing #{domain} config"
 
-      this.$el.find('.alert-box').remove()
-      this.$el.prepend html
+    this.$('.alert-box').remove()
+    this.$el.prepend html
 
   isGlobal: ->
     _.isEmpty App.secret_view.secret.val()
@@ -78,13 +81,10 @@ class App.Views.ConfigView extends Backbone.View
 
     if config.save_all
       if @isGlobal()
-        console.log 'saving config GLOBALY'
         @model.save config
-
       else
         domain = App.secret_view.domain.val()
         if (domain = App.domains.where(url: domain)[0])
-          console.log 'saving config for MODEL'
           domain.save config: config
     else
       @model.destroy()
