@@ -4,19 +4,24 @@ class App.Models.Secret extends Backbone.Model
 
   initialize: ->
     @on 'error', (model, errors) ->
-      console.log errors
+      console.warn errors
 
     error = @validate @attributes
-    unless error
-      @create()
+    @create() unless error
 
   validate: (attrs) ->
+    errors = []
     for own index, value of attrs
       unless attrs[index].length
-        return [index, "can't be blank"]
+        errors.push "#{index} can't be blank"
+
+    unless _.isEmpty errors
+      errors
 
   create: ->
     model       = @toJSON()
+    return if _.isEmpty model
+
     config      = model.config
     symbols     = "!@#]^&*(%[?${+=})_-|/<>".split('')
     domain      = model.domain.toLowerCase()
