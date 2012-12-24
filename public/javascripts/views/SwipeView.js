@@ -11,54 +11,20 @@
       return SwipeView.__super__.constructor.apply(this, arguments);
     }
 
-    SwipeView.prototype.el = $('.panel-nav');
+    SwipeView.prototype.el = $('#root');
 
     SwipeView.prototype.active_panel = 1;
 
-    SwipeView.prototype.events = {
-      'click a': 'animate'
-    };
-
     SwipeView.prototype.initialize = function() {
-      var _this = this;
-      this.swipe = new Swipe($('#swipe')[0], {
+      this.$el.wrapInner('<div class="swipe-container">');
+      this.swipe = new Swipe(this.$el[0], {
         startSlide: this.active_panel,
-        callback: function(e, index, el) {
-          return _this.animated(e, index, el);
-        }
+        callback: this.animated
       });
-      this.animated();
-      return app.SecretView.focusInput();
+      return this.animated();
     };
 
-    SwipeView.prototype.animated = function(e, index, el) {
-      var $active, $nav, $next, $panel, $prev, next, position, prev;
-      $nav = $('.panel-nav');
-      $panel = $('#swipe .panel');
-      position = this.swipe.getPos();
-      $active = $panel.eq(position);
-      $next = $('.next', $nav);
-      $prev = $('.prev', $nav);
-      next = (position <= this.swipe.length ? position + 1 : position);
-      prev = (position > 0 ? position - 1 : 0);
-      if (navigator.userAgent.match(/ipad/i) || !app.mobile) {
-        $nav.fadeIn('fast');
-      }
-      if (position === (this.swipe.length - 1)) {
-        $next.hide();
-        $prev.show();
-        return $('span', $prev).text($panel.eq(prev).data('title'));
-      } else if (position === 0) {
-        $next.show();
-        $prev.hide();
-        return $('span', $next).text($panel.eq(next).data('title'));
-      } else {
-        $next.show();
-        $prev.show();
-        $('span', $prev).text($panel.eq(prev).data('title'));
-        return $('span', $next).text($panel.eq(next).data('title'));
-      }
-    };
+    SwipeView.prototype.animated = function(e, index, el) {};
 
     SwipeView.prototype.animate = function(e) {
       var direction;

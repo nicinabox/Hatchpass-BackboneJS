@@ -5,14 +5,29 @@
     return new FastClick(document.body);
   }, false);
 
+  $(window).on('resize', function(e) {
+    var _this = this;
+    return setTimeout(function() {
+      return $('#root').height($(_this).height());
+    }, 200);
+  });
+
   $(function() {
+    $('#root').css({
+      visibility: 'visible',
+      height: $(window).height()
+    });
     App.config = new App.Models.Config;
     App.domains = new App.Collections.Domains;
+    App.sidebar_view = new App.Views.SidebarView;
     App.config_view = new App.Views.ConfigView({
       model: App.config
     });
     App.domains_view = new App.Views.DomainsView;
-    return App.secret_view = new App.Views.SecretView;
+    App.secret_view = new App.Views.SecretView;
+    if (App.mobile) {
+      return App.swipe_view = new App.Views.SwipeView;
+    }
   });
 
 }).call(this);

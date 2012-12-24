@@ -79,10 +79,10 @@
       }
     };
 
-    SecretView.prototype.render = function(model) {
-      var config, secret;
-      if (model instanceof Backbone.Model) {
-        console.log('load config from model');
+    SecretView.prototype.render = function(event) {
+      var config, model, secret;
+      if (event instanceof Backbone.Model) {
+        model = event;
         config = model.get('config');
       }
       config || (config = App.config.toJSON());
@@ -90,16 +90,14 @@
         domain: this.domain.val(),
         config: config
       });
-      if (secret) {
-        this.secret.val(secret.get('secret'));
-        if (App.mobile) {
-          this.secret.show().attr('readonly', false);
-        }
-        if (model.keyCode === 13) {
-          this.focusInput();
-        }
-        return App.config_view.setAlert(this.domain.val());
+      this.secret.val(secret.get('secret'));
+      if (App.mobile) {
+        this.secret.show().attr('readonly', false);
       }
+      if (event.keyCode === 13) {
+        this.focusInput();
+      }
+      return App.config_view.setAlert(this.domain.val());
     };
 
     return SecretView;

@@ -18,7 +18,7 @@
     Secret.prototype.initialize = function() {
       var error;
       this.on('error', function(model, errors) {
-        return console.log(errors);
+        return console.warn(errors);
       });
       error = this.validate(this.attributes);
       if (!error) {
@@ -27,19 +27,26 @@
     };
 
     Secret.prototype.validate = function(attrs) {
-      var index, value;
+      var errors, index, value;
+      errors = [];
       for (index in attrs) {
         if (!__hasProp.call(attrs, index)) continue;
         value = attrs[index];
         if (!attrs[index].length) {
-          return [index, "can't be blank"];
+          errors.push("" + index + " can't be blank");
         }
+      }
+      if (!_.isEmpty(errors)) {
+        return errors;
       }
     };
 
     Secret.prototype.create = function() {
       var character, config, domain, hash, host, key_num, model, nums, secret, secret_idx, sym_idx, symbols, this_upper, tld, _i, _len, _ref;
       model = this.toJSON();
+      if (_.isEmpty(model)) {
+        return;
+      }
       config = model.config;
       symbols = "!@#]^&*(%[?${+=})_-|/<>".split('');
       domain = model.domain.toLowerCase();

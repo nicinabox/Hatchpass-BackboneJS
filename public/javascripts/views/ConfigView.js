@@ -90,14 +90,16 @@
       if (domain == null) {
         domain = "domain";
       }
-      if (!this.isGlobal()) {
+      if (this.isGlobal()) {
+        html = '';
+      } else {
         html = this.alert_template({
           type: 'notice',
           content: "Editing " + domain + " config"
         });
-        this.$el.find('.alert-box').remove();
-        return this.$el.prepend(html);
       }
+      this.$('.alert-box').remove();
+      return this.$el.prepend(html);
     };
 
     ConfigView.prototype.isGlobal = function() {
@@ -114,14 +116,12 @@
       this.model.set(config);
       if (config.save_all) {
         if (this.isGlobal()) {
-          console.log('saving config GLOBALY');
           return this.model.save(config);
         } else {
           domain = App.secret_view.domain.val();
           if ((domain = App.domains.where({
             url: domain
           })[0])) {
-            console.log('saving config for MODEL');
             return domain.save({
               config: config
             });

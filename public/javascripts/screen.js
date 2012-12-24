@@ -2,32 +2,7 @@
 (function() {
 
   $(function() {
-    var hide_help, setActivePanel;
-    setActivePanel = function(target) {
-      var $nav_item, $target;
-      target || (target = location.hash || '#domains');
-      $target = $(target);
-      $nav_item = $(".panel-nav a[href^=" + target + "]");
-      $nav_item.parents('#sidebar').find('.panel').hide();
-      $nav_item.siblings().removeClass('active');
-      $nav_item.addClass('active');
-      return $target.show();
-    };
-    $('#root').css({
-      visibility: 'visible',
-      height: $(window).height()
-    });
-    App.secret_view.focusInput();
-    $(window).on('resize', function(e) {
-      var _this = this;
-      return setTimeout(function() {
-        return $('#root').height($(_this).height());
-      }, 200);
-    });
-    $('.panel-nav a').on('click', function(e) {
-      return setActivePanel(this.hash);
-    });
-    setActivePanel();
+    var hide_help;
     hide_help = localStorage.help;
     if (!hide_help) {
       $('.help').show();
