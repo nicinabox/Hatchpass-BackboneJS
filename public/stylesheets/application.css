@@ -658,6 +658,9 @@ a {
 #config form .field {
   padding: 5px 20px;
 }
+#config form .field > label {
+  padding: 5px 0;
+}
 #config form label {
   display: block;
   float: left;
