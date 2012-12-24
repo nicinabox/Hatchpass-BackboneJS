@@ -4,8 +4,8 @@ class App.Views.SecretView extends Backbone.View
   secret: $('#secret')
   events:
     'reset': 'render'
+    'change': 'render'
     'keyup input.required': 'render'
-    'change input.required': 'render'
     'focus #secret': 'saveDomain'
     'click .clear': 'clearInput'
 
@@ -53,6 +53,13 @@ class App.Views.SecretView extends Backbone.View
     unless focused
       @secret.focus()
 
+  toggleInputClears: ->
+    this.$('input').each ->
+      if $(this).val().length
+        $(this).prev('.clear').fadeIn('fast');
+      else
+        $(this).prev('.clear').fadeOut('fast');
+
   clearInput: (e) ->
     e.preventDefault()
     $(e.target).next('input').val('').trigger('change')
@@ -61,14 +68,9 @@ class App.Views.SecretView extends Backbone.View
     if event instanceof Backbone.Model
       model  = event
       config = model.get 'config'
-    else
-      if $(event.target).val().length
-        $(event.target).prev('.clear').fadeIn('fast');
-      else
-        $(event.target).prev('.clear').fadeOut('fast');
-
     config ||= App.config.toJSON()
 
+    @toggleInputClears()
 
     secret = new App.Models.Secret
       domain: @domain.val()
