@@ -13,7 +13,7 @@ Modernizr.load [
   "/javascripts/vendor/json2.js",
   "/javascripts/vendor/lodash.custom.js",
   "/javascripts/vendor/backbone-min.js",
-  "/javascripts/vendor/backbone.localStorage.js",
+  "/javascripts/vendor/backbone.localstorage.js",
   "/javascripts/vendor/swipe.min.js",
   "/javascripts/vendor/fastclick.js",
   "/javascripts/vendor/Crypto.js",
