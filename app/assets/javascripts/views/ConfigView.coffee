@@ -4,11 +4,11 @@ class App.Views.ConfigView extends Backbone.View
   alert_template: _.template $('#alert-box-template').html()
   events:
     'change input': 'saveConfig'
+    'click .alert-box .close': 'clear'
 
   initialize: ->
     @listenTo @model, 'change', @render
     @listenTo @model, 'reset', @render
-    # @listenTo App.secret_view, 'empty', @render
 
     @model.fetch
       success: (model, resp) =>
@@ -19,6 +19,11 @@ class App.Views.ConfigView extends Backbone.View
       error: (model, resp) =>
         unless resp
           @render(@model)
+
+  clear: (e) ->
+    e.preventDefault()
+    App.secret_view.el.reset()
+    @setAlert()
 
   render: (model) ->
     config = model.toJSON()
@@ -62,7 +67,7 @@ class App.Views.ConfigView extends Backbone.View
     else
       html = @alert_template
         type: 'notice'
-        content: "Editing #{domain} config"
+        content: "Editing #{domain} config <a href='#' class='close'>&times;</a>"
 
     this.$('.alert-box').remove()
     this.$el.prepend html
