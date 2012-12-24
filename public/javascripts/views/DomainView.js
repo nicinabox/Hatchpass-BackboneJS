@@ -44,8 +44,9 @@
       if (App.mobile) {
         App.swipe_view.swipe.next();
       }
-      App.secret_view.domain.val(this.model.get('url')).trigger('change');
+      App.secret_view.domain.val(this.model.get('url'));
       App.config_view.render(this.model);
+      App.secret_view.render(this.model);
       return App.secret_view.focusInput();
     };
 

@@ -19,8 +19,8 @@
 
     SecretView.prototype.events = {
       'reset': 'render',
+      'change': 'render',
       'keyup input.required': 'render',
-      'change input.required': 'render',
       'focus #secret': 'saveDomain',
       'click .clear': 'clearInput'
     };
@@ -82,6 +82,16 @@
       }
     };
 
+    SecretView.prototype.toggleInputClears = function() {
+      return this.$('input').each(function() {
+        if ($(this).val().length) {
+          return $(this).prev('.clear').fadeIn('fast');
+        } else {
+          return $(this).prev('.clear').fadeOut('fast');
+        }
+      });
+    };
+
     SecretView.prototype.clearInput = function(e) {
       e.preventDefault();
       return $(e.target).next('input').val('').trigger('change');
@@ -92,14 +102,9 @@
       if (event instanceof Backbone.Model) {
         model = event;
         config = model.get('config');
-      } else {
-        if ($(event.target).val().length) {
-          $(event.target).prev('.clear').fadeIn('fast');
-        } else {
-          $(event.target).prev('.clear').fadeOut('fast');
-        }
       }
       config || (config = App.config.toJSON());
+      this.toggleInputClears();
       secret = new App.Models.Secret({
         domain: this.domain.val(),
         config: config
