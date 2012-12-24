@@ -11,6 +11,7 @@ Modernizr.load [
   "/javascripts/vendor/lodash.custom.js",
   "/javascripts/vendor/backbone-min.js",
   "/javascripts/vendor/backbone.localStorage.js",
+  "/javascripts/vendor/swipe.min.js",
   "/javascripts/vendor/fastclick.js",
   "/javascripts/vendor/Crypto.js",
   "/javascripts/vendor/SHA256.js",
@@ -26,11 +27,12 @@ Modernizr.load [
   "/javascripts/collections/Domains.js",
 
   # Views
+  "/javascripts/views/SidebarView.js",
   "/javascripts/views/ConfigView.js",
   "/javascripts/views/DomainsView.js",
   "/javascripts/views/DomainView.js",
   "/javascripts/views/SecretView.js",
-  "/javascripts/application.js",
-  "/javascripts/screen.js"
+  "/javascripts/views/SwipeView.js",
+  "/javascripts/application.js"
 
 ]

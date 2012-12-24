@@ -5,8 +5,5 @@
 
 $blue: #4CAAE4;
 
-@mixin signika {
- font-family: 'Signika', sans-serif;
-}
-
 @import "layout";
+@import "breakpoints";

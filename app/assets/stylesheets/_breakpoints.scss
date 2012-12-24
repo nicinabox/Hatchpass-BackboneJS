@@ -1,0 +1,20 @@
+@media screen and (max-width: 767px) {
+  #sidebar, #main {
+    width: 100%;
+    display: none;
+  }
+  #sidebar {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #domains {
+
+  }
+  #main {
+    display: block;
+    border-left: 5px solid #999;
+    .field {
+      width: 100%;
+    }
+  }
+}
