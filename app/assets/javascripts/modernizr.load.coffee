@@ -14,7 +14,7 @@ Modernizr.load [
   "/javascripts/vendor/lodash.custom.js",
   "/javascripts/vendor/backbone-min.js",
   "/javascripts/vendor/backbone.localstorage.js",
-  "/javascripts/vendor/swipe.min.js",
+  "/javascripts/vendor/swipe.js",
   "/javascripts/vendor/fastclick.js",
   "/javascripts/vendor/Crypto.js",
   "/javascripts/vendor/SHA256.js",

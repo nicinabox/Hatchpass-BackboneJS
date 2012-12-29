@@ -776,11 +776,11 @@ form .field {
 }
 form .field .clear {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 0;
+  top: 0;
   font-weight: bold;
   font-size: 20px;
-  padding: 4px 8px;
+  padding: 14px 18px;
   display: none;
   line-height: 1;
   color: #aaa;
@@ -815,7 +815,7 @@ input {
 input:focus {
   background: #fff;
 }
-input[readonly] {
+input[readonly], input.invisible {
   border: 0;
   background: transparent;
   -webkit-box-shadow: none;
