@@ -4,6 +4,8 @@ class App.Views.SwipeView extends Backbone.View
   swipe: {}
 
   initialize: ->
+    _.bindAll this, 'animated'
+
     if App.mobile
       this.$el.wrapInner('<div class="swipe-container">')
 
@@ -11,6 +13,5 @@ class App.Views.SwipeView extends Backbone.View
         startSlide: @active_panel
         callback: @animated
 
-      @animated()
-
   animated: (e, index, el) ->
+    @trigger 'animated', e, index, el
