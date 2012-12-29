@@ -18,17 +18,19 @@
     SwipeView.prototype.swipe = {};
 
     SwipeView.prototype.initialize = function() {
+      _.bindAll(this, 'animated');
       if (App.mobile) {
         this.$el.wrapInner('<div class="swipe-container">');
-        this.swipe = new Swipe(this.$el[0], {
+        return this.swipe = new Swipe(this.$el[0], {
           startSlide: this.active_panel,
           callback: this.animated
         });
-        return this.animated();
       }
     };
 
-    SwipeView.prototype.animated = function(e, index, el) {};
+    SwipeView.prototype.animated = function(e, index, el) {
+      return this.trigger('animated', e, index, el);
+    };
 
     return SwipeView;
 
