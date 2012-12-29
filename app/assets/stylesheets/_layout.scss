@@ -149,11 +149,11 @@ form {
     position: relative;
     .clear {
       position: absolute;
-      right: 10px;
-      top: 10px;
+      right: 0;
+      top: 0;
       font-weight: bold;
       font-size: 20px;
-      padding: 4px 8px;
+      padding: 14px 18px;
       display: none;
       line-height: 1;
       color: #aaa;
@@ -179,7 +179,7 @@ input {
   &:focus {
     background: #fff;
   }
-  &[readonly] {
+  &[readonly], &.invisible {
     border: 0;
     background: transparent;
     @include box-shadow(none);
