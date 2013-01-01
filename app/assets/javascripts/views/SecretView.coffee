@@ -8,13 +8,17 @@ class App.Views.SecretView extends Backbone.View
     'keyup input.required': 'render'
     'focus #secret': 'saveDomain'
     'click .clear': 'clearInput'
+    'autocompletechange #domain': 'load'
 
   initialize: ->
     @listenTo App.config, 'change', @render
     @listenTo App.domains, 'add destroy', @updateAutocomplete
 
     @domain.autocomplete
-      source: App.domains.pluck 'url'
+      source: App.domains.map (d) ->
+        domain = d.toJSON()
+        label: domain.url
+        id: domain.id
       autoFocus: true
 
   saveDomain: (e) ->
@@ -44,8 +48,8 @@ class App.Views.SecretView extends Backbone.View
       , wait: true
 
   updateAutocomplete: ->
-    @domain.autocomplete 'option'
-    , source: App.domains.pluck 'url'
+    @domain.autocomplete 'option',
+      source: App.domains.pluck 'url'
 
   focusInput: ->
     focused = false
@@ -72,10 +76,16 @@ class App.Views.SecretView extends Backbone.View
       .focus()
       .trigger('change')
 
+  load: (e, domain) ->
+    model = App.domains.get domain.item.id
+    @render model
+
   render: (event) ->
     if event instanceof Backbone.Model
       model  = event
       config = model.get 'config'
+      App.config_view.render model
+
     config ||= App.config.toJSON()
 
     @toggleInputClears()
