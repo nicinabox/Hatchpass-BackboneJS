@@ -28,4 +28,10 @@
       width: 100%;
     }
   }
+  .panel-nav {
+    @include clearfix;
+    a {
+      float: right;
+    }
+  }
 }
