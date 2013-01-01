@@ -36,11 +36,15 @@
 
     SecretView.prototype.saveDomain = function(e) {
       var domain, existing_domain, used;
-      setTimeout(function() {
-        if (e) {
-          return e.target.setSelectionRange(0, e.target.value.length);
+      if (e) {
+        if (App.mobile) {
+          e.target.setSelectionRange(0, e.target.value.length);
+        } else {
+          setTimeout(function() {
+            return e.target.setSelectionRange(0, e.target.value.length);
+          }, 0);
         }
-      }, 0);
+      }
       if (App.config.get('save_all')) {
         domain = this.domain.val();
         existing_domain = App.domains.where({
@@ -80,7 +84,7 @@
         }
       });
       if (!focused) {
-        return this.secret.focus();
+        return this.secret[0].focus();
       }
     };
 
@@ -96,7 +100,7 @@
 
     SecretView.prototype.clearInput = function(e) {
       e.preventDefault();
-      return $(e.target).next('input').val('').trigger('change');
+      return $(e.target).next('input').val('').focus().trigger('change');
     };
 
     SecretView.prototype.render = function(event) {

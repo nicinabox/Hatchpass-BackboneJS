@@ -18,9 +18,13 @@ class App.Views.SecretView extends Backbone.View
       autoFocus: true
 
   saveDomain: (e) ->
-    setTimeout ->
-      e.target.setSelectionRange 0, e.target.value.length if e
-    , 0
+    if e
+      if App.mobile
+        e.target.setSelectionRange 0, e.target.value.length
+      else
+        setTimeout ->
+          e.target.setSelectionRange 0, e.target.value.length
+        , 0
 
     if App.config.get('save_all')
       domain = @domain.val()
