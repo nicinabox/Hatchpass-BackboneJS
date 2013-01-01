@@ -20,10 +20,19 @@ class App.Views.DomainView extends Backbone.View
     unless App.domains.length
       App.domains_view.$el.find('.no-results').show()
 
+  updateSecret: (e, i, el) ->
+    App.secret_view.focusInput()
+
   load: (e) ->
     e.preventDefault()
-    App.swipe_view.swipe.next() if App.mobile
+
+    App.swipe_view.once 'animated', @updateSecret, this
+
     App.secret_view.domain.val @model.get('url')
     App.config_view.render @model
     App.secret_view.render(@model)
-    App.secret_view.focusInput()
+
+    if App.mobile
+      App.swipe_view.swipe.next()
+    else
+      @updateSecret()
