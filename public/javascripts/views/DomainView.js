@@ -39,15 +39,21 @@
       }
     };
 
+    DomainView.prototype.updateSecret = function(e, i, el) {
+      return App.secret_view.focusInput();
+    };
+
     DomainView.prototype.load = function(e) {
       e.preventDefault();
-      if (App.mobile) {
-        App.swipe_view.swipe.next();
-      }
+      App.swipe_view.once('animated', this.updateSecret, this);
       App.secret_view.domain.val(this.model.get('url'));
       App.config_view.render(this.model);
       App.secret_view.render(this.model);
-      return App.secret_view.focusInput();
+      if (App.mobile) {
+        return App.swipe_view.swipe.next();
+      } else {
+        return this.updateSecret();
+      }
     };
 
     return DomainView;

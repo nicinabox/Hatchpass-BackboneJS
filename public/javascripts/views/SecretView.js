@@ -22,14 +22,22 @@
       'change': 'render',
       'keyup input.required': 'render',
       'focus #secret': 'saveDomain',
-      'click .clear': 'clearInput'
+      'click .clear': 'clearInput',
+      'autocompletechange #domain': 'load'
     };
 
     SecretView.prototype.initialize = function() {
       this.listenTo(App.config, 'change', this.render);
       this.listenTo(App.domains, 'add destroy', this.updateAutocomplete);
       return this.domain.autocomplete({
-        source: App.domains.pluck('url'),
+        source: App.domains.map(function(d) {
+          var domain;
+          domain = d.toJSON();
+          return {
+            label: domain.url,
+            id: domain.id
+          };
+        }),
         autoFocus: true
       });
     };
@@ -103,11 +111,18 @@
       return $(e.target).next('input').val('').focus().trigger('change');
     };
 
+    SecretView.prototype.load = function(e, domain) {
+      var model;
+      model = App.domains.get(domain.item.id);
+      return this.render(model);
+    };
+
     SecretView.prototype.render = function(event) {
       var config, model, secret;
       if (event instanceof Backbone.Model) {
         model = event;
         config = model.get('config');
+        App.config_view.render(model);
       }
       config || (config = App.config.toJSON());
       this.toggleInputClears();
