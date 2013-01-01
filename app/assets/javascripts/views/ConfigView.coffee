@@ -24,6 +24,7 @@ class App.Views.ConfigView extends Backbone.View
     e.preventDefault()
     App.secret_view.el.reset()
     @setAlert()
+    @render(@model)
 
   render: (model) ->
     config = model.toJSON()

@@ -75,6 +75,7 @@ class App.Views.SecretView extends Backbone.View
       .val('')
       .focus()
       .trigger('change')
+    App.config_view.clear(e)
 
   load: (e, domain) ->
     model = App.domains.get domain.item.id

@@ -44,7 +44,8 @@
     ConfigView.prototype.clear = function(e) {
       e.preventDefault();
       App.secret_view.el.reset();
-      return this.setAlert();
+      this.setAlert();
+      return this.render(this.model);
     };
 
     ConfigView.prototype.render = function(model) {

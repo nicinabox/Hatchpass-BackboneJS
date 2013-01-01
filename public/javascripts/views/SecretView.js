@@ -108,7 +108,8 @@
 
     SecretView.prototype.clearInput = function(e) {
       e.preventDefault();
-      return $(e.target).next('input').val('').focus().trigger('change');
+      $(e.target).next('input').val('').focus().trigger('change');
+      return App.config_view.clear(e);
     };
 
     SecretView.prototype.load = function(e, domain) {
