@@ -882,4 +882,13 @@ hr {
   #main .field {
     width: 100%;
   }
+
+  .panel-nav {
+    overflow: hidden;
+    *zoom: 1;
+  }
+  .panel-nav a {
+    display: block;
+    float: right;
+  }
 }
