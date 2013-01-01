@@ -52,7 +52,7 @@ class App.Views.SecretView extends Backbone.View
         false
 
     unless focused
-      @secret.focus()
+      @secret[0].focus()
 
   toggleInputClears: ->
     this.$('input').each ->
@@ -63,7 +63,10 @@ class App.Views.SecretView extends Backbone.View
 
   clearInput: (e) ->
     e.preventDefault()
-    $(e.target).next('input').val('').trigger('change')
+    $(e.target).next('input')
+      .val('')
+      .focus()
+      .trigger('change')
 
   render: (event) ->
     if event instanceof Backbone.Model
