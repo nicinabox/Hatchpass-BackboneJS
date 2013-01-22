@@ -114,8 +114,10 @@
 
     SecretView.prototype.load = function(e, domain) {
       var model;
-      model = App.domains.get(domain.item.id);
-      return this.render(model);
+      if (domain.item) {
+        model = App.domains.get(domain.item.id);
+        return this.render(model);
+      }
     };
 
     SecretView.prototype.render = function(event) {

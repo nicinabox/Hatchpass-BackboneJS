@@ -78,8 +78,9 @@ class App.Views.SecretView extends Backbone.View
     App.config_view.clear(e)
 
   load: (e, domain) ->
-    model = App.domains.get domain.item.id
-    @render model
+    if domain.item
+      model = App.domains.get domain.item.id
+      @render model
 
   render: (event) ->
     if event instanceof Backbone.Model
