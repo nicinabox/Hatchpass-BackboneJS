@@ -148,6 +148,7 @@ form {
     @include clearfix;
     position: relative;
     .clear {
+      z-index: 10;
       position: absolute;
       right: 0;
       top: 0;
