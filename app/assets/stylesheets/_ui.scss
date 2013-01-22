@@ -1,0 +1,38 @@
+form {
+  input {
+    position: relative;
+    &[type=checkbox] {
+      border: none;
+      width: 50%;
+      float: right;
+      text-align: center;
+      cursor: pointer;
+      text-transform: uppercase;
+      border: 1px dashed #aaa;
+      padding: 8px 10px;
+      @include box-shadow(none);
+      @include border-radius(15px);
+      font-size: 12px;
+      font-weight: bold;
+      color: #aaa;
+      line-height: 1;
+      height: 30px;
+      &:before {
+        content: "";
+      }
+      &:after {
+        content: "off";
+      }
+      &:checked {
+        border: 1px solid $blue;
+        color: $blue;
+        &:before {
+          content: "on";
+        }
+        &:after {
+          content: "";
+        }
+      }
+    }
+  }
+}

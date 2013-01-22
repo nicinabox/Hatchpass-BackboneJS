@@ -43,7 +43,7 @@ a {
       float: left;
       width: 50%;
     }
-    input {
+    input:not([type=checkbox]) {
       width: 50%;
       float: right;
     }

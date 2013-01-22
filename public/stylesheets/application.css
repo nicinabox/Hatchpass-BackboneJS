@@ -613,6 +613,49 @@ table {
   float: right;
 }
 
+form input {
+  position: relative;
+}
+form input[type=checkbox] {
+  border: none;
+  width: 50%;
+  float: right;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  border: 1px dashed #aaa;
+  padding: 8px 10px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #aaa;
+  line-height: 1;
+  height: 30px;
+}
+form input[type=checkbox]:before {
+  content: "";
+}
+form input[type=checkbox]:after {
+  content: "off";
+}
+form input[type=checkbox]:checked {
+  border: 1px solid #4caae4;
+  color: #4caae4;
+}
+form input[type=checkbox]:checked:before {
+  content: "on";
+}
+form input[type=checkbox]:checked:after {
+  content: "";
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -666,7 +709,7 @@ a {
   float: left;
   width: 50%;
 }
-#config form input {
+#config form input:not([type=checkbox]) {
   width: 50%;
   float: right;
 }

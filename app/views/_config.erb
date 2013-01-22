@@ -2,12 +2,12 @@
   <form>
      <div class="field switch">
        <label for="caps">Caps</label>
-       <%= erb :'shared/_ui_switch', :locals => { :name => 'caps' } %>
+       <%= erb :'shared/_checkbox', :locals => { :name => 'caps' } %>
     </div>
 
     <div class="field switch">
       <label for="symbols">Symbols</label>
-      <%= erb :'shared/_ui_switch', :locals => { :name => 'symbols' } %>
+      <%= erb :'shared/_checkbox', :locals => { :name => 'symbols' } %>
     </div>
 
     <div class="field">
@@ -28,7 +28,7 @@
 
     <div class="field switch">
       <label for="save_all">Save All</label>
-      <%= erb :'shared/_ui_switch', :locals => { :name => 'save_all' } %>
+      <%= erb :'shared/_checkbox', :locals => { :name => 'save_all' } %>
     </div>
 
   </form>
