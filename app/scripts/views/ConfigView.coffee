@@ -12,7 +12,9 @@ class App.Views.ConfigView extends Backbone.View
 
     @model.fetch
       success: (model, resp) =>
-        unless _.isEmpty resp
+        if _.isEmpty resp
+          @render(@model)
+        else
           delete @model.attributes[0]
           @model.set resp[0]
 
