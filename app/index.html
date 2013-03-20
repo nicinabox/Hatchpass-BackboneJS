@@ -1,0 +1,163 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Hatchpass</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
+  <link rel="apple-touch-icon-precomposed" href="icon" />
+
+  <link href='http://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="stylesheet" href="styles/application.css">
+
+  <!-- build:js scripts/vendor/modernizr.js -->
+  <script src="components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+</head>
+<body>
+  <div id="root">
+    <div id="sidebar">
+      <nav class="panel-nav">
+        <a href="#domains">
+          <span>Domains</span>
+        </a>
+        <a href="#config">
+          <span>Config</span>
+        </a>
+      </nav>
+
+      <div id="domains" class="panel" data-title="Recent">
+        <ul>
+          <li class="no-results">You have no recent domains</li>
+        </ul>
+      </div>
+
+      <div id="config" class="panel" data-title="Config">
+        <form>
+           <div class="field switch">
+              <label for="caps">Caps</label>
+              <input type="hidden" name="caps" value="false" readonly="true">
+              <input type="checkbox" name="caps" value="true" id="caps">
+          </div>
+
+          <div class="field switch">
+            <label for="symbols">Symbols</label>
+            <input type="hidden" name="symbols" value="false" readonly="true">
+            <input type="checkbox" name="symbols" value="true" id="symbols">
+          </div>
+
+          <div class="field">
+            <label for="length">Length</label>
+            <input type="number" name="length" value="" id="length" min="6" class="required">
+          </div>
+
+          <div class="field">
+            <label for="master">Master Password</label>
+            <input type="password" id="master" name="master" value="" class="required">
+          </div>
+
+          <div class="field">
+            <label for="key">Key</label>
+            <input type="text" name="key" value="" id="key" class="required" autocapitalize="off">
+          </div>
+          <hr>
+
+          <div class="field switch">
+            <label for="save_all">Save All</label>
+            <input type="hidden" name="save_all" value="false" readonly="true">
+            <input type="checkbox" name="save_all" value="true" id="save_all">
+
+          </div>
+
+        </form>
+      </div>
+
+      <script type="text/template" id="alert-box-template">
+        <div class="alert-box ${type}">${content}</div>
+      </script>
+    </div>
+
+    <div id="main">
+      <div id="new_secret" class="panel" data-title="Hatchpass">
+        <form action="" method="post" accept-charset="utf-8">
+          <div class="field">
+            <a href="#domain" class="clear">&times;</a>
+            <input type="url" id="domain" name="domain" class="required" placeholder="Eg, google.com">
+          </div>
+          <div class="field">
+            <input type="text" id="secret" name="secret" readonly class="invisible">
+          </div>
+        </form>
+      </div>
+
+      <div id="footer">
+        <nav>
+          <span>Hatchpass is a project by <a href="http://twitter.com/nicinabox">@nicinabox</a></span>
+          <a href="/about">About</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/template" id="recent-domain-template">
+    <a href='#${url}' class='domain'>
+      ${url}
+    </a>
+    <a href='#remove' class='remove'>&times;</a>
+  </script>
+
+  <!-- build:js scripts/vendor.js -->
+  <script src="components/jquery/jquery.js"></script>
+  <script src="components/json2/json2.js"></script>
+  <script src="components/lodash/dist/lodash.underscore.js"></script>
+  <script src="components/backbone/backbone.js"></script>
+  <script src="components/backbone.localStorage/backbone.localStorage.js"></script>
+  <script src="components/fastclick/lib/fastclick.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js(.tmp) scripts/application.js -->
+  <script src="scripts/app.js"></script>
+
+  <script src="scripts/models/Config.js"></script>
+  <script src="scripts/models/Domain.js"></script>
+  <script src="scripts/models/Secret.js"></script>
+
+  <script src="scripts/collections/Domains.js"></script>
+
+  <script src="scripts/views/SidebarView.js"></script>
+  <script src="scripts/views/ConfigView.js"></script>
+  <script src="scripts/views/DomainsView.js"></script>
+  <script src="scripts/views/DomainView.js"></script>
+  <script src="scripts/views/SecretView.js"></script>
+  <script src="scripts/views/SwipeView.js"></script>
+
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f29ec75cb25bc695d00006b');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+
+</body>
+</html>

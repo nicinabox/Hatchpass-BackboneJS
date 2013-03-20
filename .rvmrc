@@ -1,2 +1,2 @@
-rvm use --create ruby-1.9.3@hatchpass-js
+rvm use --create ruby-2.0.0@hatchpass-js
 

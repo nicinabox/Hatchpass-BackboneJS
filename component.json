@@ -1,0 +1,16 @@
+{
+  "name": "hatchpass",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "jquery": "~1.9.1",
+    "fastclick": "~0.6.0",
+    "json2": "",
+    "lodash": "~1.0.1",
+    "backbone": "~1.0.0",
+    "backbone.localStorage": "~1.1.0",
+    "jquery-serializeObject": "",
+    "normalize.scss": ""
+  },
+  "devDependencies": {}
+}
