@@ -83,7 +83,7 @@
       </div>
 
       <script type="text/template" id="alert-box-template">
-        <div class="alert-box ${type}">${content}</div>
+        <div class="alert-box <%= type %>"><%= content %></div>
       </script>
     </div>
 
@@ -111,8 +111,8 @@
   </div>
 
   <script type="text/template" id="recent-domain-template">
-    <a href='#${url}' class='domain'>
-      ${url}
+    <a href='#<%= url %>' class='domain'>
+      <%= url %>
     </a>
     <a href='#remove' class='remove'>&times;</a>
   </script>
