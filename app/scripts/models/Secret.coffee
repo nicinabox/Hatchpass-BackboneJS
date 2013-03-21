@@ -38,13 +38,13 @@ class App.Models.Secret extends Backbone.Model
 
     for character in secret
       if character.match(/[a-zA-Z]/) # Letters
-        if config.caps == true && !this_upper
+        if config.caps == 'true' && !this_upper
           this_upper = true
           secret[_i] = character.match(/[a-zA-Z]/)[0].toUpperCase()
         else
           this_upper = false
       else # Numbers
-        if config.symbols == true
+        if config.symbols == 'true'
           secret_idx = parseInt(_i + key_num / 3)
           sym_idx = nums + _i + (key_num * nums) + (1 * _i)
           unless  (secret[secret_idx] == null) or
