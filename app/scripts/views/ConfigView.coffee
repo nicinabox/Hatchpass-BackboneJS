@@ -12,9 +12,7 @@ class App.Views.ConfigView extends Backbone.View
 
     @model.fetch
       success: (model, resp) =>
-        if _.isEmpty resp
-          @render(@model)
-        else
+        unless _.isEmpty resp
           delete @model.attributes[0]
           @model.set resp[0]
 
@@ -95,6 +93,7 @@ class App.Views.ConfigView extends Backbone.View
         domain = App.secret_view.domain.val()
         if (domain = App.domains.where(url: domain)[0])
           domain.save config: config
+          App.secret_view.render(domain)
     else
       @model.destroy()
       localStorage.clear()
