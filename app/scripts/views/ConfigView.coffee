@@ -32,14 +32,15 @@ class App.Views.ConfigView extends Backbone.View
     config = model.toJSON()
     config = config.config if config.config
 
-    for own key, value of config
-      switch $("[name=#{key}]").last().attr('type')
-        when "checkbox"
-          $("[name=#{key}]").attr('checked', value)
-          break
-        else
-          $("[name=#{key}]").val(value)
-          break
+    $inputs = this.$el.find('form input')
+
+    $inputs.each ->
+      value = config[$(this).attr('name')]
+
+      if $(this).is(':checkbox')
+        $(this).attr('checked', value)
+      else
+        $(this).val(value)
 
   import: ->
     if localStorage.hp_config
